@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import HomeNavbar from './components/navbar';
 import LoginPage from './components/login_page';
+import RegisterPage from './components/register_page';
 import {BrowserRouter as Router,Route, Switch } from 'react-router-dom';
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
        <Router>
        <Switch>
          <Route path="/login" component={LoginPage}/>
+         <Route path="/register" component={RegisterPage}/>
        </Switch>
        </Router>
       </div>
