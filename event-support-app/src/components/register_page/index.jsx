@@ -6,13 +6,12 @@ import { Form, Button, Col} from 'react-bootstrap';
 export default class RegisterPage extends React.Component{
     render(){
         return(
-        <div style={{width:"60%", margin:"auto"}}>
+        <div style={{width:"30%", margin:"auto"}}>
 <Jumbotron fluid>
   <Container>
     <h1>Zarejestruj się:</h1>
-    <Form>
 
-    <Form.Row>
+    <Form>
     <Form.Group as={Col} controlId="formGridName">
       <Form.Label>Imię</Form.Label>
       <Form.Control placeholder="Imię" />
@@ -27,35 +26,27 @@ export default class RegisterPage extends React.Component{
       <Form.Label>Ksywa</Form.Label>
       <Form.Control  placeholder="Ksywa" />
     </Form.Group>
-  </Form.Row>
 
-  <Form.Row>
     <Form.Group as={Col} controlId="formGridEmail">
       <Form.Label>Email</Form.Label>
       <Form.Control type="email" placeholder="Enter email" />
     </Form.Group>
-  </Form.Row>
 
-  <Form.Row>
   <Form.Group as={Col} controlId="formGridPassword">
       <Form.Label>Hasło</Form.Label>
-      <Form.Control type="password" placeholder="Password" />
+      <Form.Control type="password" placeholder="Hasło" />
     </Form.Group>
 
     <Form.Group as={Col} controlId="formGridPassword2">
       <Form.Label>Powtórz hasło</Form.Label>
-      <Form.Control type="password" placeholder="Hasło" />
+      <Form.Control type="password" placeholder="Powtórz hasło" />
     </Form.Group>
-  </Form.Row>
 
   <Form.Group controlId="formGridAddress1">
     <Form.Label>Adres</Form.Label>
     <Form.Control placeholder="Pełny adres" />
   </Form.Group>
-
-  <Form.Row>
-
-
+  
   <Form.Group>
           <Form.Check
             type="checkbox"
@@ -63,12 +54,12 @@ export default class RegisterPage extends React.Component{
           />
         </Form.Group>
 
-  </Form.Row>
-
   <Button variant="primary" type="submit">
     Zarejestruj
   </Button>
 </Form>
+
+
   </Container>
 </Jumbotron>
 </div>
