@@ -1,12 +1,12 @@
 import React from 'react';
 import { Jumbotron, Container } from 'react-bootstrap';
 import { Form, Button, Col} from 'react-bootstrap';
-
+import './style.css';
 
 export default class RegisterPage extends React.Component{
     render(){
         return(
-        <div style={{width:"30%", margin:"auto"}}>
+          <Container className="Container">
 <Jumbotron fluid>
   <Container>
     <h1>Zarejestruj się:</h1>
@@ -42,10 +42,10 @@ export default class RegisterPage extends React.Component{
       <Form.Control type="password" placeholder="Powtórz hasło" />
     </Form.Group>
 
-  <Form.Group controlId="formGridAddress1">
-    <Form.Label>Adres</Form.Label>
-    <Form.Control placeholder="Pełny adres" />
-  </Form.Group>
+  <Form.Group as={Col} controlId="formGridAddress1">
+      <Form.Label>Adres</Form.Label>
+      <Form.Control placeholder="Pełny adres" />
+    </Form.Group>
   
   <Form.Group>
           <Form.Check
@@ -62,7 +62,7 @@ export default class RegisterPage extends React.Component{
 
   </Container>
 </Jumbotron>
-</div>
+</Container>
         )
     }
 }

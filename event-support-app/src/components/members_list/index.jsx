@@ -24,10 +24,10 @@ getAllMembers() {
 
 renderItem(member, index) {
   return (
-          <Row key={index}>
+          <Row key={index} onClick = {() => {this.props.history.push("/memberDetails/" + index)}}>
               <Col></Col>
               <Col style={{padding: "0.7%"}}>
-                  <ListGroupItem >
+                  <ListGroupItem>
                       {member}
                       </ListGroupItem>
               </Col>
