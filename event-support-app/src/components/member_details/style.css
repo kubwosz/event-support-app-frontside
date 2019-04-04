@@ -1,0 +1,23 @@
+#Page {
+    display: grid;
+    grid-template-columns: 60% 30% 10%;
+    grid-template-rows: 10% 90%;
+}
+
+#Members{
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#MemberDetails{
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.memberList{
+    padding: 0.7%;
+}
+
+.detailsHeader{
+    font-weight: bold;
+}
