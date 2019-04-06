@@ -1,8 +1,9 @@
 import React from 'react';
 import { Container, Row, Col, ListGroupItem} from 'react-bootstrap';
 import _ from 'lodash';
+import { withRouter } from 'react-router-dom'
 
-export default class MembersList extends React.Component{
+ class MembersList extends React.Component{
 
   constructor()
   {
@@ -23,7 +24,7 @@ getAllMembers() {
 }
 
 renderItem(member, index) {
-  return (
+ return (
           <Row key={index} onClick = {() => {this.props.history.push("/memberDetails/" + index)}}>
               <Col></Col>
               <Col style={{padding: "0.7%"}}>
@@ -51,3 +52,5 @@ renderItem(member, index) {
     );
 }
 }
+
+export default withRouter(MembersList);
