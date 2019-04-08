@@ -1,23 +1,31 @@
 #Page {
     display: grid;
-    grid-template-columns: 60% 30% 10%;
-    grid-template-rows: 10% 90%;
+    grid-template-columns: 2;
+    grid-gap: 1rem;
+    grid-auto-flow: dense;
+    margin: 2%;
 }
 
 #Members{
     grid-column: 1;
-    grid-row: 2;
+    margin: auto;
+    width: 30rem;
 }
 
 #MemberDetails{
     grid-column: 2;
-    grid-row: 2;
+    margin: auto;
+    width: 30rem;
+    margin-right: 35%;
 }
 
-.memberList{
-    padding: 0.7%;
+.Header{
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
 }
 
 .detailsHeader{
     font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
 }
+
