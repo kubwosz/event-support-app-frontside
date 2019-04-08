@@ -48,10 +48,11 @@ export default class RegisterPage extends React.Component{
     </Form.Group>
   
   <Form.Group>
-          <Form.Check
-            type="checkbox"
-            label="Czy posiadasz auto?"
-          />
+  <Form.Label>Czy posiadasz auto?</Form.Label>
+      <Form.Control id="CarControl" as="select">
+        <option>Nie</option>
+        <option>Tak</option>
+      </Form.Control>
         </Form.Group>
 
   <Button variant="primary" type="submit">

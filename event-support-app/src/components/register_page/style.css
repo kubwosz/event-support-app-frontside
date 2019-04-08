@@ -1,4 +1,9 @@
 .Container{
     width: 30%;
-    margin: "auto";
+    margin: auto;
+}
+
+#CarControl{
+    margin: auto;
+    width: auto;
 }
