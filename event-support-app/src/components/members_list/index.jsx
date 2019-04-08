@@ -44,7 +44,7 @@ renderItem(member, index) {
 
     return (
     <div id="MembersList">
-    <h1>Lista użytkowników:</h1>
+    <h1 className="Header">Lista użytkowników:</h1>
      {members}
     </div>
     );
