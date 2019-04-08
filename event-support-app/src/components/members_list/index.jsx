@@ -2,6 +2,7 @@ import React from 'react';
 import { Container, Row, Col, ListGroupItem} from 'react-bootstrap';
 import _ from 'lodash';
 import { withRouter } from 'react-router-dom'
+import './style.css';
 
  class MembersList extends React.Component{
 
@@ -26,13 +27,11 @@ getAllMembers() {
 renderItem(member, index) {
  return (
           <Row key={index} onClick = {() => {this.props.history.push("/memberDetails/" + index)}}>
-              <Col></Col>
-              <Col style={{padding: "0.7%"}}>
+              <Col >
                   <ListGroupItem>
                       {member}
                       </ListGroupItem>
               </Col>
-              <Col></Col>
           </Row>
   )
 }
@@ -42,12 +41,11 @@ renderItem(member, index) {
     const members = _.map(this.state.members, (member, k) => {
         return this.renderItem(member, k);
     });
+
     return (
-      <div>
+    <div id="MembersList">
     <h1>Lista użytkowników:</h1>
-    <Container style={{width: "60%"}}>
      {members}
-    </Container>
     </div>
     );
 }
