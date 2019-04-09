@@ -15,18 +15,6 @@ export default class HomeNavbar extends React.Component {
           <FormControl type="text" placeholder="Szukaj" className="mr-sm-2" />
           <Button variant="outline-info">Szukaj</Button>
         </Form>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a href="#">
-              <span class="glyphicon glyphicon-user" /> Zarejestruj się
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <span class="glyphicon glyphicon-log-in" /> Zaloguj się
-            </a>
-          </li>
-        </ul>
       </Navbar>
     );
   }

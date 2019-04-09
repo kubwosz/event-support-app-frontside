@@ -27,7 +27,7 @@ export default class MemberDetails extends React.Component{
     this.getMemberDetails();
 }
 
-getMemberDetails(nextProps = this.props.match.params.id ) {
+getMemberDetails(nextProps = this.props.match.params.id) {
  this.setState(prevState => ({
   member: {
     ...prevState.member,
