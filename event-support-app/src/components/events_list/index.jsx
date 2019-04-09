@@ -27,7 +27,7 @@ getAllMembers() {
 
 renderEvents = (event, index) => {
   return (
-    <Card className="grid-item">
+    <Card className="grid-item" onClick={() => {this.props.history.push("/event/" + index)}}>
     <Card.Body>
       <Card.Title>{event}</Card.Title>
       <Card.Subtitle className="mb-2 text-muted">Taki tam wyjeździk dgdzies</Card.Subtitle>
