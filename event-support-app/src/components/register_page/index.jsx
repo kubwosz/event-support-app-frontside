@@ -22,32 +22,15 @@ export default class RegisterPage extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onSubmit = e => {
-    e.preventDefault();
-
-    //handle form processing here....
-  };
-
   passwordValidation = () => {
-    console.log(this.state.password);
-    console.log(this.state.password2);
-
     this.setState(
       {
         isPasswordCorrect: this.state.password === this.state.password2
       },
       () => {
         this.setState({ show: !this.state.isPasswordCorrect });
-        console.log(this.state.show);
-        console.log(this.state.password);
-        console.log(this.state.password2);
       }
     );
-
-    console.log(this.state.password);
-    console.log(this.state.password2);
-    console.log(this.state.isPasswordCorrect);
-    console.log(this.state.password === this.state.password2);
   };
 
   render() {
