@@ -3,6 +3,7 @@ import { Jumbotron, Container } from "react-bootstrap";
 import { Form, Button, Col } from "react-bootstrap";
 import { Overlay, Tooltip } from "react-bootstrap";
 import "./style.css";
+import axios from "axios";
 
 export default class RegisterPage extends React.Component {
   constructor(...args) {
@@ -10,6 +11,8 @@ export default class RegisterPage extends React.Component {
 
     this.attachRef = target => this.setState({ target });
     this.state = {
+      username: "",
+      email: "",
       password: "",
       password2: "",
       isPasswordCorrect: true,
@@ -33,6 +36,21 @@ export default class RegisterPage extends React.Component {
     );
   };
 
+  registerUser = () => {
+    axios
+      .post("/signup", {
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password
+      })
+      .then(() => {
+        window.confirm("Użytkownik zarejestrowany pomyślnie");
+      })
+      .catch(err => {
+        window.confirm(err);
+      });
+  };
+
   render() {
     const { password, password2, show, target, isPasswordCorrect } = this.state;
 
@@ -53,14 +71,25 @@ export default class RegisterPage extends React.Component {
                 <Form.Control placeholder="Nazwisko" />
               </Form.Group>
 
-              <Form.Group as={Col} controlId="formGridNickname">
+              <Form.Group as={Col} controlId="formGridUsername">
                 <Form.Label>Ksywa</Form.Label>
-                <Form.Control required placeholder="Ksywa" />
+                <Form.Control
+                  required
+                  name="username"
+                  placeholder="Ksywa"
+                  onChange={this.onChange}
+                />
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Email</Form.Label>
-                <Form.Control required type="email" placeholder="Enter email" />
+                <Form.Control
+                  required
+                  name="email"
+                  type="email"
+                  placeholder="Enter email"
+                  onChange={this.onChange}
+                />
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridPassword">
@@ -111,8 +140,8 @@ export default class RegisterPage extends React.Component {
 
               <Button
                 variant="primary"
-                type="submit"
                 disabled={!isPasswordCorrect}
+                onClick={this.registerUser}
               >
                 Zarejestruj
               </Button>
