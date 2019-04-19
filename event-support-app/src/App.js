@@ -10,6 +10,13 @@ import MemberDetails from './components/member_details';
 import {BrowserRouter as Router,Route, Switch } from 'react-router-dom';
 
 class App extends Component {
+
+  checkAuth = () => {
+    const token = localStorage.getItem("token");
+    const refreshToken = localStorage.getItem("refreshToken");
+    console.log(token);
+  };
+
   render() {
     return (
       <div className="App">
