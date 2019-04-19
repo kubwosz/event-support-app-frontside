@@ -6,9 +6,27 @@
     padding: 0.7%;
 }
 
-#MembersList{
+#Page {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 1rem;
+    grid-auto-flow: dense;
+    margin: 2%;
+}
+
+#Members{
+    grid-column: 1;
     margin: auto;
     width: 30rem;
-    padding-top: 2%;
-    /* border: 3px solid green; */
+}
+
+#MemberDetails{
+    grid-column: 2;
+    margin: auto;
+    width: 30rem;
+}
+
+h1,h2{
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
 }
