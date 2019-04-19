@@ -82,31 +82,34 @@ class MembersList extends React.Component {
           <h1>Lista użytkowników:</h1>
           {members}
         </div>
-        {this.state.activeMemberId ? (
-          <div id="MemberDetails">
-            <h2>Szczegóły o użytkowniku:</h2>
-            <Row>
-              <Col>
-                <ListGroupItem>
-                  <b className="detailsHeader">ID: </b>
-                  {this.state.members[activeMemberId]
-                    ? this.state.members[activeMemberId].id
-                    : null}
-                </ListGroupItem>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <ListGroupItem>
-                  <b className="detailsHeader">Imię: </b>
-                  {this.state.members[activeMemberId]
-                    ? this.state.members[activeMemberId].name
-                    : null}
-                </ListGroupItem>
-              </Col>
-            </Row>
-          </div>
-        ) : null}
+        <div
+          id="MemberDetails"
+          style={{
+            visibility: this.state.activeMemberId ? "visible" : "hidden"
+          }}
+        >
+          <h2>Szczegóły o użytkowniku:</h2>
+          <Row>
+            <Col>
+              <ListGroupItem>
+                <b className="detailsHeader">ID: </b>
+                {this.state.members[activeMemberId]
+                  ? this.state.members[activeMemberId].id
+                  : null}
+              </ListGroupItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <ListGroupItem>
+                <b className="detailsHeader">Imię: </b>
+                {this.state.members[activeMemberId]
+                  ? this.state.members[activeMemberId].name
+                  : null}
+              </ListGroupItem>
+            </Col>
+          </Row>
+        </div>
       </div>
     );
   }
