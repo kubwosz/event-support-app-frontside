@@ -6,6 +6,7 @@ import RegisterPage from './components/register_page';
 import MembersList from './components/members_list';
 import EventsList from './components/events_list';
 import EventDetails from './components/event_details';
+import addEvent from './components/add_event';
 import {BrowserRouter as Router,Route, Switch } from 'react-router-dom';
 
 class App extends Component {
@@ -23,6 +24,7 @@ class App extends Component {
        <Router>
        <Switch>
          <Route exact path="/login" component={LoginPage}/>
+         <Route exact path="/addEvent" component={addEvent}/>
          <Route exact path="/register" component={RegisterPage}/>
          <Route exact path="/members" component={MembersList}/>
          <Route exact path="/event/:id" component={EventDetails}/>
