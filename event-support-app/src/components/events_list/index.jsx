@@ -63,7 +63,7 @@ class EventsList extends React.Component {
 
     return (
       <div id="EventsList">
-        <h1 className="Header">Lista eventów:</h1>
+        <h1 className="Header">Lista wydarzeń:</h1>
         <div className="grid-wrapper">{events}</div>
       </div>
     );
