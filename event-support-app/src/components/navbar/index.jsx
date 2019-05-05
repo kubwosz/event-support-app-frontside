@@ -13,6 +13,7 @@ export default class HomeNavbar extends React.Component {
         <Nav className="mr-auto">
           <Nav.Link href="/events">Wydarzenia</Nav.Link>
           <Nav.Link href="/members">Lista użytkowników</Nav.Link>
+          <Nav.Link href="/addEvent">Dodaj nowe wydarzenie</Nav.Link>
         </Nav>
         <Nav>
           <NavDropdown
