@@ -1,5 +1,6 @@
 import React from "react";
 import { Tabs, Tab, Jumbotron, Container, ListGroup } from "react-bootstrap";
+import { InputGroup, FormControl } from "react-bootstrap";
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import "./style.css";
@@ -9,19 +10,19 @@ class AddEvent extends React.Component {
     super();
     this.state = {
       event: {
-        id: -1,
-        owner_id: 13,
-        name: "Super REKOnstrukcja Air Soft Gun nad jeziorem!",
-        ownersName: "Andrzejek",
-        location: "Warszawa",
-        startDate: "09-05-2020 13:00",
-        endDate: "10-05-2020 17:00",
-        meetingLocation: "Wroclaw",
-        distance: 150,
-        personalCargoType: "Jedna walizka duża, jedna mała",
-        transportCost: 35.6,
-        sharedCost: 35.6,
-        cargoCapacity: 20
+        id: 0,
+        owner_id: 0,
+        name: "",
+        ownersName: "",
+        location: "",
+        startDate: "",
+        endDate: "",
+        meetingLocation: "",
+        distance: 0,
+        personalCargoType: "",
+        transportCost: 0,
+        sharedCost: 0,
+        cargoCapacity: 0
       }
     };
   }
@@ -41,15 +42,44 @@ class AddEvent extends React.Component {
 
   render() {
     return (
-      <div id="Page">
+      <div>
         <Jumbotron className="JumbotronEvent" fluid>
           <Container>
-            <h1>{this.state.event.name}</h1>
-            <h2>{this.state.event.location}</h2>
-            <h5>
-              {this.state.event.startDate} - {this.state.event.endDate}
-            </h5>
-            <p />
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text id="inputGroup-sizing-default">
+                  Nazwa wydarzenia:
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                aria-label="Name"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text id="inputGroup-sizing-default">
+                  Lokalizacja wydarzenia:
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                aria-label="Location"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </InputGroup>
+
+            <InputGroup className="mb-3">
+              <InputGroup.Prepend>
+                <InputGroup.Text id="inputGroup-sizing-default">
+                  Data wydarzenia:
+                </InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                aria-label="Date"
+                aria-describedby="inputGroup-sizing-default"
+              />
+            </InputGroup>
           </Container>
         </Jumbotron>
         <h1 id="eventInfo">Informacje o wydarzeniu:</h1>
@@ -58,23 +88,22 @@ class AddEvent extends React.Component {
             <Tab eventKey="main" title="Główne">
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <b> Utworzone przez:</b> {this.state.event.ownersName}
+                  <b> Utworzone przez:</b> <input />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Miejsce wydarzenia:</b> {this.state.event.location}
+                  <b>Miejsce wydarzenia:</b> <input />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Miejsce zbiórki:</b> {this.state.event.meetingLocation}
+                  <b>Miejsce zbiórki:</b> <input />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Odległość od miejsca zbiórki:</b>{" "}
-                  {this.state.event.distance}
+                  <b>Odległość od miejsca zbiórki:</b> <input />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Rozpoczęcie wydarzenia:</b> {this.state.event.startDate}
+                  <b>Rozpoczęcie wydarzenia:</b> <input />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Zakończenie wydarzenia:</b> {this.state.event.endDate}
+                  <b>Zakończenie wydarzenia:</b> <input />
                 </ListGroup.Item>
               </ListGroup>
             </Tab>
@@ -82,10 +111,10 @@ class AddEvent extends React.Component {
             <Tab eventKey="date" title="Koszty">
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <b>Koszt transportu:</b> {this.state.event.meetingLocation}
+                  <b>Koszt transportu:</b> <input />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Koszt do podziału:</b> {this.state.event.distance}
+                  <b>Koszt do podziału:</b> <input />
                 </ListGroup.Item>
               </ListGroup>
             </Tab>
@@ -93,10 +122,10 @@ class AddEvent extends React.Component {
             <Tab eventKey="cargo" title="Bagaż">
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <b>Rodzaj bagażu:</b> {this.state.event.personalCargoType}
+                  <b>Rodzaj bagażu:</b> <input />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Pojemność auta:</b> {this.state.event.cargoCapacity}
+                  <b>Pojemność auta:</b> <input />
                 </ListGroup.Item>
               </ListGroup>
             </Tab>

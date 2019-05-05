@@ -41,7 +41,7 @@ class EventDetails extends React.Component {
 
   render() {
     return (
-      <div id="Page">
+      <div>
         <Jumbotron className="JumbotronEvent" fluid>
           <Container>
             <h1>{this.state.event.name}</h1>

@@ -1,27 +1,3 @@
-.JumbotronEvent{
-    height: 80%;
-    width: 80%;
-    margin: auto;
-    margin-top: 0;
-    background-color: rgb(173, 172, 172);   
-}
-
-#EventInformations{
-margin-left: 10%;
-margin-right: 10%;
-}
-
-#eventInfo{
-    text-align: left;
-    margin-left: 10%;
-}
-
-.grid-item{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#EventsList{
-    margin: 1%;
+input{
+    margin-left: 0.5%;
 }
