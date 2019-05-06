@@ -11,9 +11,9 @@ class EventDetails extends React.Component {
       event: {
         id: -1,
         owner_id: 13,
-        name: "Super REKOnstrukcja Air Soft Gun nad jeziorem!",
+        name: "Rekonstrukcja Air Soft Gun nad jeziorem!",
         ownersName: "Andrzejek",
-        location: "Warszawa",
+        location: "Mazury",
         startDate: "09-05-2020 13:00",
         endDate: "10-05-2020 17:00",
         meetingLocation: "Wroclaw",
@@ -47,9 +47,7 @@ class EventDetails extends React.Component {
           <Container>
             <h1>{this.state.event.name}</h1>
             <h2>{this.state.event.location}</h2>
-            <h5>
-              {this.state.event.startDate} - {this.state.event.endDate}
-            </h5>
+            <h5>17 maja 2019 13:00 - 19 maja 2019 18:30</h5>
             <p />
           </Container>
         </Jumbotron>
@@ -72,10 +70,10 @@ class EventDetails extends React.Component {
                   {this.state.event.distance}
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Rozpoczęcie wydarzenia:</b> {this.state.event.startDate}
+                  <b>Rozpoczęcie wydarzenia:</b> 17 maja 2019 13:00
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Zakończenie wydarzenia:</b> {this.state.event.endDate}
+                  <b>Zakończenie wydarzenia:</b> 19 maja 2019 18:30
                 </ListGroup.Item>
               </ListGroup>
             </Tab>
