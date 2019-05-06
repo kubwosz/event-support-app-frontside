@@ -109,6 +109,89 @@ class MembersList extends React.Component {
               </ListGroupItem>
             </Col>
           </Row>
+          <Row>
+            <Col>
+              <ListGroupItem>
+                <b className="detailsHeader">Ksywka: </b>
+                {this.state.members[activeMemberId]
+                  ? this.state.members[activeMemberId].name
+                  : null}
+              </ListGroupItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <ListGroupItem>
+                <b className="detailsHeader">Adres: </b>
+                {this.state.members[activeMemberId]
+                  ? this.state.members[activeMemberId].name
+                  : null}
+              </ListGroupItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <ListGroupItem>
+                <b className="detailsHeader">Email: </b>
+                {this.state.members[activeMemberId]
+                  ? this.state.members[activeMemberId].name
+                  : null}
+              </ListGroupItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <ListGroupItem>
+                <b className="detailsHeader">Status: </b>
+                {this.state.members[activeMemberId]
+                  ? this.state.members[activeMemberId].name
+                  : null}
+              </ListGroupItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <ListGroupItem>
+                <b className="detailsHeader">Wolne weekendy: </b>
+                {this.state.members[activeMemberId]
+                  ? this.state.members[activeMemberId].name
+                  : null}
+              </ListGroupItem>
+            </Col>
+          </Row>
+
+          <h2>Szczegóły o samochodzie:</h2>
+          <Row>
+            <Col>
+              <ListGroupItem>
+                <b className="detailsHeader">Model: </b>
+                Opel Astra Kombi
+              </ListGroupItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <ListGroupItem>
+                <b className="detailsHeader">Spalanie: </b>
+                7l benzyny / 100km
+              </ListGroupItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <ListGroupItem>
+                <b className="detailsHeader">Ilość miejsc: </b>5
+              </ListGroupItem>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <ListGroupItem>
+                <b className="detailsHeader">Ilość miejsca na bagaż: </b>7
+                średnich
+              </ListGroupItem>
+            </Col>
+          </Row>
         </div>
       </div>
     );
