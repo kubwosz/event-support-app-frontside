@@ -21,7 +21,8 @@ class EventDetails extends React.Component {
         personalCargoType: "Jedna walizka duża, jedna mała",
         transportCost: 35.6,
         sharedCost: 35.6,
-        cargoCapacity: 20
+        cargoCapacity: 20,
+        GearsType: ""
       }
     };
   }
@@ -98,6 +99,43 @@ class EventDetails extends React.Component {
                 <ListGroup.Item>
                   <b>Pojemność auta:</b> {this.state.event.cargoCapacity}
                 </ListGroup.Item>
+              </ListGroup>
+            </Tab>
+
+            <Tab eventKey="gears" title="Odzież">
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <b>Typ:</b> {this.state.event.GearsType}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <b>Kamuflaż:</b> {this.state.event.GearsCamoufalge}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <b>Dodatkowa odzież:</b> {this.state.event.GearsAdditional}
+                </ListGroup.Item>
+              </ListGroup>
+            </Tab>
+
+            <Tab eventKey="tasks" title="Zadania">
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <b>Status:</b> {this.state.event.TasksStatus}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <b>Opis:</b> {this.state.event.TasksDescription}
+                </ListGroup.Item>
+              </ListGroup>
+            </Tab>
+
+            <Tab eventKey="participants" title="Uczestnicy">
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <b>Rola:</b> {this.state.event.participantsRole}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <b>Lider:</b> {this.state.event.participantsLeader}
+                </ListGroup.Item>
+                <b>Lista uczestników:</b>
               </ListGroup>
             </Tab>
           </Tabs>
