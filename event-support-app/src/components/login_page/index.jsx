@@ -1,0 +1,79 @@
+import React from "react";
+import { Jumbotron, Container } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
+import axios from "axios";
+
+export default class LoginPage extends React.Component {
+  constructor(...args) {
+    super(...args);
+
+    this.attachRef = target => this.setState({ target });
+    this.state = {
+      username: "",
+      password: ""
+    };
+  }
+
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  logInUser = () => {
+    axios
+      .post("/login", {
+        username: this.state.username,
+        password: this.state.password
+      })
+      .then(response => {
+        console.log(response);
+        localStorage.setItem("token", response.headers.authorization);
+        window.location.reload();
+      })
+      .catch(err => {
+        window.confirm(err);
+      });
+  };
+
+  render() {
+    const { password, password2, show, target, isPasswordCorrect } = this.state;
+
+    return (
+      <div style={{ width: "40%", margin: "auto" }}>
+        <Jumbotron fluid>
+          <Container>
+            <h1>Zaloguj się:</h1>
+            <Form>
+              <Form.Group controlId="formBasicEmail">
+                <Form.Label>Nazwa użytkownika:</Form.Label>
+                <Form.Control
+                  required
+                  name="username"
+                  type="text"
+                  placeholder="Nazwa użytkownika"
+                  onChange={this.onChange}
+                />
+              </Form.Group>
+
+              <Form.Group controlId="formBasicPassword">
+                <Form.Label>Hasło:</Form.Label>
+                <Form.Control
+                  required
+                  name="password"
+                  type="password"
+                  placeholder="Hasło"
+                  onChange={this.onChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formBasicChecbox">
+                <Form.Check type="checkbox" label="Zapamiętaj" />
+              </Form.Group>
+              <Button variant="primary" onClick={this.logInUser}>
+                Zaloguj
+              </Button>
+            </Form>
+          </Container>
+        </Jumbotron>
+      </div>
+    );
+  }
+}
