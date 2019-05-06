@@ -16,13 +16,19 @@ export default class RegisterPage extends React.Component {
       password: "",
       password2: "",
       isPasswordCorrect: true,
-      show: false
+      address: "",
+      show: false,
+      haveCar: true
     };
   }
 
   onChange = e => {
-    console.log(e.target);
     this.setState({ [e.target.name]: e.target.value });
+  };
+
+  onChangeCar = val => {
+    let temp = val.target.value == "Tak" ? true : false;
+    this.setState({ haveCar: temp });
   };
 
   passwordValidation = () => {
@@ -40,8 +46,10 @@ export default class RegisterPage extends React.Component {
     axios
       .post("/signup", {
         username: this.state.username,
+        address: this.state.address,
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
+        vehicle: this.state.haveCar
       })
       .then(() => {
         window.confirm("Użytkownik zarejestrowany pomyślnie");
@@ -127,12 +135,21 @@ export default class RegisterPage extends React.Component {
 
               <Form.Group as={Col} controlId="formGridAddress1">
                 <Form.Label>Adres</Form.Label>
-                <Form.Control placeholder="Pełny adres" />
+                <Form.Control
+                  required
+                  name="address"
+                  placeholder="Pełny adres"
+                  onChange={this.onChange}
+                />
               </Form.Group>
 
               <Form.Group>
                 <Form.Label>Czy posiadasz auto?</Form.Label>
-                <Form.Control id="CarControl" as="select">
+                <Form.Control
+                  onChange={this.onChangeCar}
+                  id="CarControl"
+                  as="select"
+                >
                   <option>Nie</option>
                   <option>Tak</option>
                 </Form.Control>
