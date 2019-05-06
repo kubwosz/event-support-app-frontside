@@ -44,13 +44,12 @@ class EventsList extends React.Component {
         <Card.Body>
           <Card.Title>{event}</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            Taki tam wyjeździk dgdzies
+            Wyjazd duży w bieszczady
           </Card.Subtitle>
           <Card.Text>
-            OPISIKk example text to build on the card title and make up the bulk
-            of the card's content. + {event}
+            Dokładny opis {event} o tym co i jak zabrać, w jakim miejscu. Więcej
+            informacji po kliknięciu.
           </Card.Text>
-          <Card.Link href="#">Link gdzieś tam</Card.Link>
         </Card.Body>
       </Card>
     );
