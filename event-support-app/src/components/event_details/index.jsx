@@ -9,6 +9,31 @@ class EventDetails extends React.Component {
     super();
     this.state = {
       event: {
+        id: 0,
+        owner_id: 0,
+        name: "",
+        ownersName: "",
+        location: "",
+        startDate: "",
+        endDate: "",
+        meetingLocation: "",
+        distance: 0,
+        personalCargoType: "",
+        transportCost: 0,
+        sharedCost: 0,
+        cargoCapacity: 0,
+        GearsType: ""
+      }
+    };
+  }
+
+  componentDidMount() {
+    this.getAllMembers();
+  }
+
+  getAllMembers() {
+    this.setState(prevState => ({
+      event: {
         id: -1,
         owner_id: 13,
         name: "Rekonstrukcja Air Soft Gun nad jeziorem!",
@@ -24,21 +49,17 @@ class EventDetails extends React.Component {
         cargoCapacity: 20,
         GearsType: ""
       }
-    };
-  }
-
-  componentDidMount() {
-    this.getAllMembers();
-  }
-
-  getAllMembers(nextProps = this.props.match.params.id) {
-    this.setState(prevState => ({
-      event: {
-        ...prevState.event,
-        id: nextProps
-      }
     }));
   }
+
+  // getAllMembers(nextProps = this.props.match.params.id) {
+  //   this.setState(prevState => ({
+  //     event: {
+  //       ...prevState.event,
+  //       id: nextProps
+  //     }
+  //   }));
+  // }
 
   render() {
     return (

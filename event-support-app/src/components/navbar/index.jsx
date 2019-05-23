@@ -30,9 +30,9 @@ export default class HomeNavbar extends React.Component {
       return (
         <Container id="userLogged">
           <Form>
-            <Form.Group>Uzytkownik1Ksywa</Form.Group>
+            <Form.Group>KRzysiek</Form.Group>
 
-            <Form.Group>Adres mailowy</Form.Group>
+            <Form.Group>krzysztof@mail.com</Form.Group>
             <Button onClick={this.logOut} variant="outline-info">
               Wyloguj się
             </Button>

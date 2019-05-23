@@ -29,7 +29,7 @@ class App extends Component {
          <Route exact path="/members" component={MembersList}/>
          <Route exact path="/event/:id" component={EventDetails}/>
          <Route exact path="/events" component={EventsList}/>
-         <Route path="/" component={RegisterPage}/>
+         <Route path="/" component={EventsList}/>
        </Switch>
        </Router>
       </div>
