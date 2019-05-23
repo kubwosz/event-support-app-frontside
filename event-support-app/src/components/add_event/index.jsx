@@ -1,9 +1,10 @@
 import React from "react";
 import { Tabs, Tab, Jumbotron, Container, ListGroup } from "react-bootstrap";
-import { InputGroup, FormControl } from "react-bootstrap";
+import { InputGroup, FormControl, Button } from "react-bootstrap";
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import "./style.css";
+import Axios from "axios";
 
 class AddEvent extends React.Component {
   constructor() {
@@ -22,23 +23,53 @@ class AddEvent extends React.Component {
         personalCargoType: "",
         transportCost: 0,
         sharedCost: 0,
-        cargoCapacity: 0
+        cargoCapacity: 0,
+        gearsType: "",
+        cargo_id: 0,
+        cargo_event_id: 0,
+        item: "",
+        volume: "",
+        gear_id: 0,
+        gear_event_id: 0,
+        type: "",
+        camouflage: "",
+        additional_gear: "",
+        task_id: 0,
+        task_event_id: 0,
+        user_id: 0,
+        status: "",
+        description: ""
       }
     };
   }
 
-  componentDidMount() {
-    this.getAllMembers();
-  }
+  postEventInfo = () => {
+    console.log(this.state);
+    Axios.post("/event", {
+      owner_id: this.state.owner_id,
+      name: this.state.name,
+      location: this.state.location,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+      meetingLocation: this.state.meetingLocation,
+      distance: this.state.distance,
+      personalCargoType: this.state.personalCargoType,
+      transportCost: this.state.transportCost,
+      sharedCost: this.state.sharedCost,
+      cargoCapacity: this.state.cargoCapacity,
+      cargoNeeds: this.state.cargoNeeds
+    })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-  getAllMembers(nextProps = this.props.match.params.id) {
-    this.setState(prevState => ({
-      event: {
-        ...prevState.event,
-        id: nextProps
-      }
-    }));
-  }
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   render() {
     return (
@@ -54,6 +85,8 @@ class AddEvent extends React.Component {
               <FormControl
                 aria-label="Name"
                 aria-describedby="inputGroup-sizing-default"
+                name="name"
+                onChange={this.onChange}
               />
             </InputGroup>
 
@@ -66,6 +99,8 @@ class AddEvent extends React.Component {
               <FormControl
                 aria-label="Location"
                 aria-describedby="inputGroup-sizing-default"
+                name="location"
+                onChange={this.onChange}
               />
             </InputGroup>
 
@@ -78,6 +113,7 @@ class AddEvent extends React.Component {
               <FormControl
                 aria-label="Date"
                 aria-describedby="inputGroup-sizing-default"
+                onChange={this.onChange}
               />
             </InputGroup>
           </Container>
@@ -87,23 +123,24 @@ class AddEvent extends React.Component {
           <Tabs defaultActiveKey="main" id="uncontrolled-tab-example">
             <Tab eventKey="main" title="Główne">
               <ListGroup variant="flush">
+                {/* <ListGroup.Item>
+                  <b> Utworzone przez:</b> <input name  onChange={this.onChange} />
+                </ListGroup.Item> */}
                 <ListGroup.Item>
-                  <b> Utworzone przez:</b> <input />
+                  <b>Miejsce zbiórki:</b>{" "}
+                  <input name="meetingLocation" onChange={this.onChange} />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Miejsce wydarzenia:</b> <input />
+                  <b>Odległość od miejsca zbiórki:</b>{" "}
+                  <input name="meetingLocation" onChange={this.onChange} />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Miejsce zbiórki:</b> <input />
+                  <b>Rozpoczęcie wydarzenia:</b>{" "}
+                  <input name="startDate" onChange={this.onChange} />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Odległość od miejsca zbiórki:</b> <input />
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Rozpoczęcie wydarzenia:</b> <input />
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Zakończenie wydarzenia:</b> <input />
+                  <b>Zakończenie wydarzenia:</b>{" "}
+                  <input name="endDate" onChange={this.onChange} />
                 </ListGroup.Item>
               </ListGroup>
             </Tab>
@@ -111,10 +148,12 @@ class AddEvent extends React.Component {
             <Tab eventKey="date" title="Koszty">
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <b>Koszt transportu:</b> <input />
+                  <b>Koszt transportu:</b>{" "}
+                  <input name="transportCost" onChange={this.onChange} />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Koszt do podziału:</b> <input />
+                  <b>Koszt do podziału:</b>{" "}
+                  <input name="sharedCost" onChange={this.onChange} />
                 </ListGroup.Item>
               </ListGroup>
             </Tab>
@@ -122,14 +161,60 @@ class AddEvent extends React.Component {
             <Tab eventKey="cargo" title="Bagaż">
               <ListGroup variant="flush">
                 <ListGroup.Item>
-                  <b>Rodzaj bagażu:</b> <input />
+                  <b>Rodzaj bagażu:</b>{" "}
+                  <input name="cargoType" onChange={this.onChange} />
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <b>Pojemność auta:</b> <input />
+                  <b>Pojemność auta:</b>{" "}
+                  <input name="car_capacity" onChange={this.onChange} />
+                </ListGroup.Item>
+              </ListGroup>
+            </Tab>
+
+            <Tab eventKey="gears" title="Odzież">
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <b>Typ:</b>{" "}
+                  <input name="gears_type" onChange={this.onChange} />
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <b>Kamuflaż:</b>{" "}
+                  <input name="camouflage" onChange={this.onChange} />
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <b>Dodatkowa odzież:</b>{" "}
+                  <input name="additional_gear" onChange={this.onChange} />
+                </ListGroup.Item>
+              </ListGroup>
+            </Tab>
+
+            <Tab eventKey="tasks" title="Zadania">
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  <b>Status:</b>{" "}
+                  <input name="task_status" onChange={this.onChange} />
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  <b>Opis:</b>{" "}
+                  <input name="task_description" onChange={this.onChange} />
+                </ListGroup.Item>
+              </ListGroup>
+            </Tab>
+
+            <Tab eventKey="participants" title="Uczestnicy">
+              <ListGroup variant="flush">
+                {/* <ListGroup.Item>
+                  <b>Rola:</b>{" "}
+                  <input name="pa" onChange={this.onChange} />
+                </ListGroup.Item> */}
+                <ListGroup.Item>
+                  <b>Lider:</b> <input name="leader" onChange={this.onChange} />
                 </ListGroup.Item>
               </ListGroup>
             </Tab>
           </Tabs>
+
+          <Button onClick={this.postEventInfo}> Zapisz dane </Button>
         </div>
       </div>
     );
