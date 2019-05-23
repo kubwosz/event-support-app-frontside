@@ -11,28 +11,28 @@ class MembersList extends React.Component {
       members: [
         {
           id: 1,
-          name: "Krzys1",
+          name: "Krzysiek",
           surname: "Nowak",
-          email: "sample2@mail.com",
+          email: "krzysztof@mail.com",
           address: "Wrocław, Plac Grunwaldzki"
         },
         {
           id: 2,
-          name: "Krzys2",
+          name: "Łysy",
           surname: "Nowak",
-          email: "sample2@mail.com",
-          address: "Wrocław, Plac Grunwaldzki"
+          email: "lysegomail@mail.com",
+          address: "Warszawa, Plac Zbawiciela"
         },
         {
           id: 3,
-          name: "Krzys3",
+          name: "Bombardier",
           surname: "Nowak",
           email: "sample2@mail.com",
-          address: "Wrocław, Plac Grunwaldzki"
+          address: "Poznań, Marszałkowska"
         },
         {
           id: 4,
-          name: "Krzys4",
+          name: "Czołg",
           surname: "Nowak",
           email: "sample2@mail.com",
           address: "Wrocław, Plac Grunwaldzki"
@@ -124,7 +124,7 @@ class MembersList extends React.Component {
               <ListGroupItem>
                 <b className="detailsHeader">Adres: </b>
                 {this.state.members[activeMemberId]
-                  ? this.state.members[activeMemberId].name
+                  ? this.state.members[activeMemberId].address
                   : null}
               </ListGroupItem>
             </Col>
@@ -134,7 +134,7 @@ class MembersList extends React.Component {
               <ListGroupItem>
                 <b className="detailsHeader">Email: </b>
                 {this.state.members[activeMemberId]
-                  ? this.state.members[activeMemberId].name
+                  ? this.state.members[activeMemberId].email
                   : null}
               </ListGroupItem>
             </Col>
@@ -143,9 +143,7 @@ class MembersList extends React.Component {
             <Col>
               <ListGroupItem>
                 <b className="detailsHeader">Status: </b>
-                {this.state.members[activeMemberId]
-                  ? this.state.members[activeMemberId].name
-                  : null}
+                dostępny
               </ListGroupItem>
             </Col>
           </Row>
@@ -153,9 +151,7 @@ class MembersList extends React.Component {
             <Col>
               <ListGroupItem>
                 <b className="detailsHeader">Wolne weekendy: </b>
-                {this.state.members[activeMemberId]
-                  ? this.state.members[activeMemberId].name
-                  : null}
+                Tak
               </ListGroupItem>
             </Col>
           </Row>
