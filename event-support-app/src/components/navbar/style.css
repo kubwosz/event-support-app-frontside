@@ -1,3 +1,19 @@
 #userProperties{
     width: 13rem;
 }
+
+.btn-outline-info{
+    color: rgb(94, 117, 79);
+    border-color:  rgb(94, 117, 79);
+}
+
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.dropdown-menu{
+    color: #85919b;
+    background-color: #343a40;
+}

@@ -23,7 +23,7 @@ export default class HomeNavbar extends React.Component {
     this.forceUpdate();
   };
 
-  renderProperInformations = () => {
+  renderUserInformations = () => {
     const token = localStorage.getItem("token");
     console.log(token);
     if (token != null) {
@@ -41,7 +41,7 @@ export default class HomeNavbar extends React.Component {
       );
     } else {
       return (
-        <div>
+        <div className="navbar">
           <Container id="userProperties">
             <Form>
               {/* <Form.Group>
@@ -59,7 +59,11 @@ export default class HomeNavbar extends React.Component {
                   className="mr-sm-2"
                 />
               </Form.Group> */}
-              <Button href="/login" variant="outline-info">
+              <Button
+                id="navDropdownButton"
+                href="/login"
+                variant="outline-info"
+              >
                 Zaloguj się
               </Button>
             </Form>
@@ -88,7 +92,7 @@ export default class HomeNavbar extends React.Component {
             id="collasible-nav-dropdown"
             alignRight
           >
-            {this.renderProperInformations()}
+            {this.renderUserInformations()}
           </NavDropdown>
         </Nav>
       </Navbar>

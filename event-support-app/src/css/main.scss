@@ -1,0 +1,11 @@
+$colors: (
+primary: #005DFF,
+accent: rgb(50, 63, 42)
+);
+
+
+body{
+    background-color: map-get($colors,accent);
+    color: rgb(214, 224, 198);
+}
+

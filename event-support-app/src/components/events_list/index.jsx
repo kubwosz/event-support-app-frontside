@@ -1,5 +1,11 @@
 import React from "react";
-import { Card, CardGroup, CardDeck, CardColumns } from "react-bootstrap";
+import {
+  Card,
+  CardGroup,
+  CardDeck,
+  CardColumns,
+  Pagination
+} from "react-bootstrap";
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import "./style.css";
@@ -9,7 +15,9 @@ class EventsList extends React.Component {
     super();
     this.state = {
       events: [],
-      eventsToRow: []
+      eventsToRow: [],
+      activePage: 1,
+      totalPages: 3
     };
   }
 
@@ -55,15 +63,33 @@ class EventsList extends React.Component {
     );
   };
 
+  handlePaginationChange = (e, { activePage }) => this.setState({ activePage });
+
   render() {
     const events = _.map(this.state.events, (event, k) => {
       return this.renderEvents(event, k);
     });
 
+    let items = [];
+    for (let number = 1; number <= 5; number++) {
+      items.push(
+        <Pagination.Item key={number} active={number === this.state.activePage}>
+          {number}
+        </Pagination.Item>
+      );
+    }
+
     return (
       <div id="EventsList">
         <h1 className="Header">Lista wydarzeń:</h1>
         <div className="grid-wrapper">{events}</div>
+
+        <Pagination className="pagination">{items}</Pagination>
+        {/* <Pagination
+          active={this.state.activePage}
+          onPageChange={this.handlePaginationChange}
+          key={this.state.totalPages}
+        /> */}
       </div>
     );
   }
