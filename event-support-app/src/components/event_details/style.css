@@ -3,7 +3,9 @@
     width: 80%;
     margin: auto;
     margin-top: 0;
-    background-color: rgb(173, 172, 172);   
+    background-color: rgb(173, 172, 172); 
+    border-radius: 25px;
+    color: rgb(5, 32, 3);
 }
 
 #EventInformations{
@@ -25,4 +27,25 @@ margin-right: 10%;
 
 #EventsList{
     margin: 1%;
+}
+
+.list-group-item{
+    background-color: rgb(39, 49, 33);
+    border-color: white; 
+}
+
+.nav-tabs .nav-link.active{
+    border-color: rgb(173, 172, 172) rgb(173, 172, 172)rgb(39, 49, 33);
+    background-color: rgb(39, 49, 33); 
+    color: rgb(182, 184, 179);
+    font-weight: 700;
+}
+
+.nav-tabs {
+    border-radius: 0px;
+    border-color: rgb(173, 172, 172);
+}
+
+.nav-tabs .nav-link{
+    color: rgb(214, 224, 198);
 }

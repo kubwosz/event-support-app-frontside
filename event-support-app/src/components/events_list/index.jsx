@@ -84,7 +84,7 @@ class EventsList extends React.Component {
         <h1 className="Header">Lista wydarzeń:</h1>
         <div className="grid-wrapper">{events}</div>
 
-        <Pagination className="pagination">{items}</Pagination>
+        <Pagination>{items}</Pagination>
         {/* <Pagination
           active={this.state.activePage}
           onPageChange={this.handlePaginationChange}

@@ -12,6 +12,7 @@
     grid-gap: 1rem;
     grid-auto-flow: dense;
     margin: 2%;
+    font-size: 18px;
 }
 
 #Members{
@@ -31,3 +32,6 @@ h1,h2{
     font-weight: bold;
     font-family: "Times New Roman", Times, serif;
 }
+
+
+

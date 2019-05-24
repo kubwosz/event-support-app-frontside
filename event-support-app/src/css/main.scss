@@ -1,11 +1,17 @@
 $colors: (
 primary: #005DFF,
-accent: rgb(50, 63, 42)
+accent: rgb(39, 49, 33)
 );
 
 
 body{
     background-color: map-get($colors,accent);
-    color: rgb(214, 224, 198);
+    color: rgb(245, 247, 243);
+}
+
+.btn-primary{
+    margin: 1%;
+    background-color: rgb(84, 156, 43);
+    border-color: rgb(84, 156, 43);
 }
 

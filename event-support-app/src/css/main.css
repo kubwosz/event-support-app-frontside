@@ -1,5 +1,11 @@
 body {
-  background-color: #323f2a;
-  color: #d6e0c6;
+  background-color: #273121;
+  color: #f5f7f3;
+}
+
+.btn-primary {
+  margin: 1%;
+  background-color: #549c2b;
+  border-color: #549c2b;
 }
 /*# sourceMappingURL=main.css.map */
