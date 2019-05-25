@@ -8,4 +8,12 @@ body {
   background-color: #549c2b;
   border-color: #549c2b;
 }
+
+a {
+  color: white;
+}
+
+a:hover {
+  color: white;
+}
 /*# sourceMappingURL=main.css.map */

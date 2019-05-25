@@ -1,7 +1,3 @@
-.list-group-item{
-    cursor: pointer;
-}
-
 .col{
     padding: 0.7%;
 }
@@ -22,10 +18,14 @@
     width: 30rem;
 }
 
-#MemberDetails{
+.memberDetails{
     grid-column: 2;
     margin: auto;
     width: 30rem;
+}
+
+#Page .list-group-item{
+    background-color: rgb(67, 85, 56);
 }
 
 h1,h2{

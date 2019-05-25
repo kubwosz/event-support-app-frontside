@@ -54,18 +54,20 @@ class MembersList extends React.Component {
 
   renderItem(member, index) {
     return (
-      <Row
-        key={index}
-        onClick={() => {
-          this.setState({
-            activeMemberId: member.id
-          });
-        }}
-      >
-        <Col>
-          <ListGroupItem>{member.name}</ListGroupItem>
-        </Col>
-      </Row>
+      <a href={"#" + (index + 1)}>
+        <Row
+          key={index}
+          onClick={() => {
+            this.setState({
+              activeMemberId: member.id
+            });
+          }}
+        >
+          <Col>
+            <ListGroupItem>{member.name}</ListGroupItem>
+          </Col>
+        </Row>
+      </a>
     );
   }
 
@@ -83,7 +85,7 @@ class MembersList extends React.Component {
           {members}
         </div>
         <div
-          id="MemberDetails"
+          className="memberDetails"
           style={{
             visibility: this.state.activeMemberId ? "visible" : "hidden"
           }}
