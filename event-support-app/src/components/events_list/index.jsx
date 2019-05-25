@@ -17,6 +17,7 @@ class EventsList extends React.Component {
       events: [],
       eventsToRow: [],
       activePage: 1,
+      eventsPerPage: 3,
       totalPages: 3
     };
   }
@@ -42,25 +43,32 @@ class EventsList extends React.Component {
   }
 
   renderEvents = (event, index) => {
-    return (
-      <Card
-        className="grid-item"
-        onClick={() => {
-          this.props.history.push("/event/" + index);
-        }}
-      >
-        <Card.Body>
-          <Card.Title>{event}</Card.Title>
-          <Card.Subtitle className="mb-2 text-muted">
-            Wyjazd duży w bieszczady
-          </Card.Subtitle>
-          <Card.Text>
-            Dokładny opis {event} o tym co i jak zabrać, w jakim miejscu. Więcej
-            informacji po kliknięciu.
-          </Card.Text>
-        </Card.Body>
-      </Card>
-    );
+    if (
+      index >=
+        this.state.activePage * this.state.eventsPerPage -
+          this.state.eventsPerPage &&
+      index < this.state.activePage * this.state.eventsPerPage
+    ) {
+      return (
+        <Card
+          className="grid-item"
+          onClick={() => {
+            this.props.history.push("/event/" + index);
+          }}
+        >
+          <Card.Body>
+            <Card.Title>{event}</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">
+              Wyjazd duży w bieszczady
+            </Card.Subtitle>
+            <Card.Text>
+              Dokładny opis {event} o tym co i jak zabrać, w jakim miejscu.
+              Więcej informacji po kliknięciu.
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      );
+    }
   };
 
   handlePaginationChange = (e, { activePage }) => this.setState({ activePage });
@@ -73,7 +81,13 @@ class EventsList extends React.Component {
     let items = [];
     for (let number = 1; number <= 5; number++) {
       items.push(
-        <Pagination.Item key={number} active={number === this.state.activePage}>
+        <Pagination.Item
+          key={number}
+          active={number === this.state.activePage}
+          onClick={() => {
+            this.setState({ activePage: number });
+          }}
+        >
           {number}
         </Pagination.Item>
       );

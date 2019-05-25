@@ -31,7 +31,6 @@ export default class HomeNavbar extends React.Component {
         <Container id="userLogged">
           <Form>
             <Form.Group>KRzysiek</Form.Group>
-
             <Form.Group>krzysztof@mail.com</Form.Group>
             <Button onClick={this.logOut} variant="outline-info">
               Wyloguj się
@@ -66,11 +65,14 @@ export default class HomeNavbar extends React.Component {
               >
                 Zaloguj się
               </Button>
+              <a id="registerLink" href="/register">
+                Zarejestruj się
+              </a>
             </Form>
           </Container>
-          <NavDropdown.Item href="/register">
+          {/* <NavDropdown.Item href="/register">
             <b>Zarejestruj się</b>
-          </NavDropdown.Item>
+          </NavDropdown.Item> */}
         </div>
       );
     }

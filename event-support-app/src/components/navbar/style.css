@@ -1,20 +1,36 @@
 #userProperties{
-    width: 13rem;
+    width: 11rem;
 }
 
-.btn-outline-info{
-    color: rgb(94, 117, 79);
-    border-color:  rgb(94, 117, 79);
+#registerLink{
+    margin-left:5%;
+    color: rgb(141, 224, 152);
 }
+
+
 
 .navbar{
     position: sticky;
     top: 0;
     z-index: 1;
-    opacity: 0.9;
+    opacity: 0.95;
 }
 
 .dropdown-menu{
     color: #85919b;
     background-color: #343a40;
+    font-weight: 700;
 }
+
+.btn-outline-info{
+    color: rgb(161, 173, 153);
+    border-color:  rgb(139, 156, 127);
+    border-width: 2px;
+    font-weight: 900;
+    margin-bottom: 3%;
+}
+
+.btn-outline-info:hover { 
+    background-color: rgb(66, 155, 63);
+    border-color:  rgb(66, 155, 63);
+  }
