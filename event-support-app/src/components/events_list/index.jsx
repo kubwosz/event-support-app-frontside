@@ -99,11 +99,6 @@ class EventsList extends React.Component {
         <div className="grid-wrapper">{events}</div>
 
         <Pagination>{items}</Pagination>
-        {/* <Pagination
-          active={this.state.activePage}
-          onPageChange={this.handlePaginationChange}
-          key={this.state.totalPages}
-        /> */}
       </div>
     );
   }
