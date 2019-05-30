@@ -9,6 +9,7 @@ import {
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import "./style.css";
+import axios from "axios";
 
 class EventsList extends React.Component {
   constructor() {
@@ -18,7 +19,8 @@ class EventsList extends React.Component {
       eventsToRow: [],
       activePage: 1,
       eventsPerPage: 3,
-      totalPages: 3
+      totalPages: 3,
+      token: {}
     };
   }
 
@@ -27,18 +29,18 @@ class EventsList extends React.Component {
   }
 
   getAllMembers() {
-    this.setState({
-      events: [
-        "wydarzenie1",
-        "wydarzenie2",
-        "wydarzenie3",
-        "wydarzenie4",
-        "wydarzenie5",
-        "wydarzenie6",
-        "wydarzenie7",
-        "wydarzenie8",
-        "wydarzenie9"
-      ]
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: { Authorization: "" + token }
+    };
+
+    axios.get("/events", config).then(res => {
+      console.log(res);
+      this.setState({
+        events: res.data,
+        token: token
+      });
     });
   }
 

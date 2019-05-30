@@ -18,7 +18,8 @@ export default class RegisterPage extends React.Component {
       isPasswordCorrect: true,
       address: "",
       show: false,
-      haveCar: true
+      haveCar: true,
+      formValidated: false
     };
   }
 
@@ -43,24 +44,43 @@ export default class RegisterPage extends React.Component {
   };
 
   registerUser = () => {
-    axios
-      .post("/signup", {
-        username: this.state.username,
-        address: this.state.address,
-        email: this.state.email,
-        password: this.state.password,
-        vehicle: this.state.haveCar
-      })
-      .then(() => {
-        window.confirm("Użytkownik zarejestrowany pomyślnie");
-      })
-      .catch(err => {
-        window.confirm(err);
-      });
+    console.log(this.state);
+    if (this.state.formValidated) {
+      axios
+        .post("/signup", {
+          username: this.state.username,
+          address: this.state.address,
+          email: this.state.email,
+          password: this.state.password,
+          vehicle: this.state.haveCar
+        })
+        .then(() => {
+          window.confirm("Użytkownik zarejestrowany pomyślnie");
+        })
+        .catch(err => {
+          window.confirm(err);
+        });
+    }
   };
 
+  handleSubmit(event) {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.setState({ formValidated: true });
+  }
+
   render() {
-    const { password, password2, show, target, isPasswordCorrect } = this.state;
+    const {
+      password,
+      password2,
+      show,
+      target,
+      isPasswordCorrect,
+      formValidated
+    } = this.state;
 
     return (
       <Container className="Container">
@@ -68,7 +88,11 @@ export default class RegisterPage extends React.Component {
           <Container>
             <h1>Zarejestruj się:</h1>
 
-            <Form>
+            <Form
+              noValidate
+              validated={formValidated}
+              onSubmit={e => this.handleSubmit(e)}
+            >
               <Form.Group as={Col} controlId="formGridName">
                 <Form.Label>Imię</Form.Label>
                 <Form.Control placeholder="Imię" />
