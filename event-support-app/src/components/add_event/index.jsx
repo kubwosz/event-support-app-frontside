@@ -44,21 +44,33 @@ class AddEvent extends React.Component {
   }
 
   postEventInfo = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      }
+    };
+
     console.log(this.state);
-    Axios.post("/event", {
-      owner_id: this.state.owner_id,
-      name: this.state.name,
-      location: this.state.location,
-      startDate: this.state.startDate,
-      endDate: this.state.endDate,
-      meetingLocation: this.state.meetingLocation,
-      distance: this.state.distance,
-      personalCargoType: this.state.personalCargoType,
-      transportCost: this.state.transportCost,
-      sharedCost: this.state.sharedCost,
-      cargoCapacity: this.state.cargoCapacity,
-      cargoNeeds: this.state.cargoNeeds
-    })
+    Axios.post(
+      "/events",
+      {
+        owner_id: this.state.owner_id,
+        name: this.state.name,
+        location: this.state.location,
+        startDate: this.state.startDate,
+        endDate: this.state.endDate,
+        meetingLocation: this.state.meetingLocation,
+        distance: this.state.distance,
+        personalCargoType: this.state.personalCargoType,
+        transportCost: this.state.transportCost,
+        sharedCost: this.state.sharedCost,
+        cargoCapacity: this.state.cargoCapacity,
+        cargoNeeds: this.state.cargoNeeds
+      },
+      config
+    )
       .then(response => {
         console.log(response);
       })
