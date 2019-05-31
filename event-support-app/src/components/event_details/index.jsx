@@ -3,6 +3,7 @@ import { Tabs, Tab, Jumbotron, Container, ListGroup } from "react-bootstrap";
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import "./style.css";
+import axios from "axios";
 
 class EventDetails extends React.Component {
   constructor() {
@@ -28,28 +29,37 @@ class EventDetails extends React.Component {
   }
 
   componentDidMount() {
-    this.getAllMembers();
+    this.getEvent();
   }
 
-  getAllMembers() {
-    this.setState(prevState => ({
-      event: {
-        id: -1,
-        owner_id: 13,
-        name: "Rekonstrukcja Air Soft Gun nad jeziorem!",
-        ownersName: "Andrzejek",
-        location: "Mazury",
-        startDate: "09-05-2020 13:00",
-        endDate: "10-05-2020 17:00",
-        meetingLocation: "Wroclaw",
-        distance: 150,
-        personalCargoType: "Jedna walizka duża, jedna mała",
-        transportCost: 35.6,
-        sharedCost: 35.6,
-        cargoCapacity: 20,
-        GearsType: ""
+  getEvent() {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      },
+      params: {
+        id: this.props.match.params.id
       }
-    }));
+    };
+
+    axios
+      .get("/events", config)
+      .then(res => {
+        console.log(res);
+        this.setState(
+          {
+            event: res.data[0]
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   // getAllMembers(nextProps = this.props.match.params.id) {
