@@ -32,14 +32,15 @@ class EventsList extends React.Component {
     const token = localStorage.getItem("token");
 
     var config = {
-      headers: { Authorization: "" + token }
+      headers: {
+        Authorization: token
+      }
     };
 
     axios.get("/events", config).then(res => {
       console.log(res);
       this.setState({
-        events: res.data,
-        token: token
+        events: res.data
       });
     });
   }
@@ -59,13 +60,13 @@ class EventsList extends React.Component {
           }}
         >
           <Card.Body>
-            <Card.Title>{event}</Card.Title>
+            <Card.Title>{event.name}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
               Wyjazd duży w bieszczady
             </Card.Subtitle>
             <Card.Text>
-              Dokładny opis {event} o tym co i jak zabrać, w jakim miejscu.
-              Więcej informacji po kliknięciu.
+              Dokładny opis {event.meetingLocation} o tym co i jak zabrać, w
+              jakim miejscu. Więcej informacji po kliknięciu.
             </Card.Text>
           </Card.Body>
         </Card>

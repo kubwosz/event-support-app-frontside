@@ -8,7 +8,7 @@
 
 .grid-item{
     height: auto;
-    width: auto;
+    width: 430px;
     cursor: pointer;
     color: black;
     background-color: rgb(188, 202, 168);
