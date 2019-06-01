@@ -4,6 +4,7 @@ import { Form, Button, Col } from "react-bootstrap";
 import { Overlay, Tooltip } from "react-bootstrap";
 import "./style.css";
 import axios from "axios";
+import CarDetails from "../car_details/index";
 
 export default class RegisterPage extends React.Component {
   constructor(...args) {
@@ -18,18 +19,33 @@ export default class RegisterPage extends React.Component {
       isPasswordCorrect: true,
       address: "",
       show: false,
-      haveCar: true,
-      formValidated: false
+      haveCar: false,
+      formValidated: false,
+      model: "",
+      combustion: 0,
+      peopleCapacity: 0,
+      cargoCapacity: 0
     };
   }
 
   onChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    if (
+      e.target.name === "combustion" ||
+      e.target.name === "peopleCapacity" ||
+      e.target.name === "cargoCapacity"
+    ) {
+      let re = /^[0-9\b]+$/;
+      if (e.target.value === "" || re.test(e.target.value)) {
+        this.setState({ value: e.target.value });
+      }
+    } else {
+      this.setState({ [e.target.name]: e.target.value });
+    }
   };
 
   onChangeCar = val => {
-    let temp = val.target.value == "Tak" ? true : false;
-    this.setState({ haveCar: temp });
+    let tmp = val.target.value == "Tak" ? true : false;
+    this.setState({ haveCar: tmp });
   };
 
   passwordValidation = () => {
@@ -55,6 +71,7 @@ export default class RegisterPage extends React.Component {
       })
       .then(() => {
         window.confirm("Użytkownik zarejestrowany pomyślnie");
+        this.props.history.push("/login/");
       })
       .catch(err => {
         window.confirm(err);
@@ -178,7 +195,7 @@ export default class RegisterPage extends React.Component {
                   <option>Tak</option>
                 </Form.Control>
               </Form.Group>
-
+              {this.state.haveCar ? <CarDetails /> : null}
               <Button
                 variant="primary"
                 type="submit"
