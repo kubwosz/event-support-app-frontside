@@ -45,6 +45,7 @@ export default class RegisterPage extends React.Component {
 
   registerUser = () => {
     console.log(this.state);
+    this.checkFormValid();
     if (this.state.formValidated) {
       axios
         .post("/signup", {
@@ -73,6 +74,17 @@ export default class RegisterPage extends React.Component {
     this.setState({ formValidated: true });
   }
 
+  checkFormValid() {
+    if (
+      this.state.isPasswordCorrect &&
+      this.state.username != "" &&
+      this.state.email != "" &&
+      this.state.address != ""
+    ) {
+      this.setState({ formValidated: true });
+    }
+  }
+
   render() {
     const {
       password,
@@ -89,11 +101,7 @@ export default class RegisterPage extends React.Component {
           <Container>
             <h1>Zarejestruj się:</h1>
 
-            <Form
-              noValidate
-              validated={formValidated}
-              onSubmit={e => this.handleSubmit(e)}
-            >
+            <Form noValidate validated={formValidated}>
               <Form.Group as={Col} controlId="formGridName">
                 <Form.Label>Imię</Form.Label>
                 <Form.Control placeholder="Imię" />
@@ -182,7 +190,6 @@ export default class RegisterPage extends React.Component {
 
               <Button
                 variant="primary"
-                type="submit"
                 disabled={!isPasswordCorrect}
                 onClick={this.registerUser}
               >
