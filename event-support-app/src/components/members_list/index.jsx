@@ -3,6 +3,7 @@ import { Container, Row, Col, ListGroupItem } from "react-bootstrap";
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import "./style.css";
+import axios from "axios";
 
 class MembersList extends React.Component {
   constructor() {
@@ -15,28 +16,28 @@ class MembersList extends React.Component {
           surname: "Nowak",
           email: "krzysztof@mail.com",
           address: "Wrocław, Plac Grunwaldzki"
-        },
-        {
-          id: 2,
-          name: "Łysy",
-          surname: "Nowak",
-          email: "lysegomail@mail.com",
-          address: "Warszawa, Plac Zbawiciela"
-        },
-        {
-          id: 3,
-          name: "Bombardier",
-          surname: "Nowak",
-          email: "sample2@mail.com",
-          address: "Poznań, Marszałkowska"
-        },
-        {
-          id: 4,
-          name: "Czołg",
-          surname: "Nowak",
-          email: "sample2@mail.com",
-          address: "Wrocław, Plac Grunwaldzki"
         }
+        // {
+        //   id: 2,
+        //   name: "Łysy",
+        //   surname: "Nowak",
+        //   email: "lysegomail@mail.com",
+        //   address: "Warszawa, Plac Zbawiciela"
+        // },
+        // {
+        //   id: 3,
+        //   name: "Bombardier",
+        //   surname: "Nowak",
+        //   email: "sample2@mail.com",
+        //   address: "Poznań, Marszałkowska"
+        // },
+        // {
+        //   id: 4,
+        //   name: "Czołg",
+        //   surname: "Nowak",
+        //   email: "sample2@mail.com",
+        //   address: "Wrocław, Plac Grunwaldzki"
+        // }
       ],
       activeMemberId: 0
     };
@@ -48,8 +49,19 @@ class MembersList extends React.Component {
   }
 
   getAllMembers() {
-    // this.setState({
-    // });
+    const token = localStorage.getItem("token");
+    var config = {
+      headers: {
+        Authorization: token
+      }
+    };
+
+    axios.get("/guides").then(res => {
+      console.log(res);
+      this.setState({
+        members: res.data
+      });
+    });
   }
 
   renderItem(member, index) {

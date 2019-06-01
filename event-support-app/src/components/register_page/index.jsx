@@ -64,6 +64,7 @@ export default class RegisterPage extends React.Component {
   };
 
   handleSubmit(event) {
+    console.log("too");
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -181,6 +182,7 @@ export default class RegisterPage extends React.Component {
 
               <Button
                 variant="primary"
+                type="submit"
                 disabled={!isPasswordCorrect}
                 onClick={this.registerUser}
               >

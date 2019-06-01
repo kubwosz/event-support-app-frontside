@@ -18,7 +18,7 @@ class EventsList extends React.Component {
       events: [],
       eventsToRow: [],
       activePage: 1,
-      eventsPerPage: 3,
+      eventsPerPage: 6,
       totalPages: 3,
       token: {}
     };
@@ -62,7 +62,7 @@ class EventsList extends React.Component {
           <Card.Body>
             <Card.Title>{event.name}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
-              Wyjazd duży w bieszczady
+              {event.startDate} - {event.endDate}
             </Card.Subtitle>
             <Card.Text>
               Dokładny opis {event.meetingLocation} o tym co i jak zabrać, w
