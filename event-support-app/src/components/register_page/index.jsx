@@ -29,18 +29,7 @@ export default class RegisterPage extends React.Component {
   }
 
   onChange = e => {
-    if (
-      e.target.name === "combustion" ||
-      e.target.name === "peopleCapacity" ||
-      e.target.name === "cargoCapacity"
-    ) {
-      let re = /^[0-9\b]+$/;
-      if (e.target.value === "" || re.test(e.target.value)) {
-        this.setState({ value: e.target.value });
-      }
-    } else {
-      this.setState({ [e.target.name]: e.target.value });
-    }
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   onChangeCar = val => {
