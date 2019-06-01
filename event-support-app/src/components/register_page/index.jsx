@@ -45,44 +45,31 @@ export default class RegisterPage extends React.Component {
 
   registerUser = () => {
     console.log(this.state);
-    this.checkFormValid();
-    if (this.state.formValidated) {
-      axios
-        .post("/signup", {
-          username: this.state.username,
-          address: this.state.address,
-          email: this.state.email,
-          password: this.state.password,
-          vehicle: this.state.haveCar
-        })
-        .then(() => {
-          window.confirm("Użytkownik zarejestrowany pomyślnie");
-        })
-        .catch(err => {
-          window.confirm(err);
-        });
-    }
+    axios
+      .post("/signup", {
+        username: this.state.username,
+        address: this.state.address,
+        email: this.state.email,
+        password: this.state.password,
+        vehicle: this.state.haveCar
+      })
+      .then(() => {
+        window.confirm("Użytkownik zarejestrowany pomyślnie");
+      })
+      .catch(err => {
+        window.confirm(err);
+      });
   };
 
   handleSubmit(event) {
     console.log("too");
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+    if (form.checkValidity() === true) {
+      this.registerUser();
     }
+    event.preventDefault();
+    event.stopPropagation();
     this.setState({ formValidated: true });
-  }
-
-  checkFormValid() {
-    if (
-      this.state.isPasswordCorrect &&
-      this.state.username != "" &&
-      this.state.email != "" &&
-      this.state.address != ""
-    ) {
-      this.setState({ formValidated: true });
-    }
   }
 
   render() {
@@ -101,7 +88,11 @@ export default class RegisterPage extends React.Component {
           <Container>
             <h1>Zarejestruj się:</h1>
 
-            <Form noValidate validated={formValidated}>
+            <Form
+              noValidate
+              validated={formValidated}
+              onSubmit={e => this.handleSubmit(e)}
+            >
               <Form.Group as={Col} controlId="formGridName">
                 <Form.Label>Imię</Form.Label>
                 <Form.Control placeholder="Imię" />
@@ -190,8 +181,8 @@ export default class RegisterPage extends React.Component {
 
               <Button
                 variant="primary"
+                type="submit"
                 disabled={!isPasswordCorrect}
-                onClick={this.registerUser}
               >
                 Zarejestruj
               </Button>
