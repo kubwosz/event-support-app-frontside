@@ -8,7 +8,7 @@ import EventsList from './components/events_list';
 import EventDetails from './components/event_details';
 import addEvent from './components/add_event';
 import UserDetails from './components/user_details';
-import {BrowserRouter as Router,Route, Switch } from 'react-router-dom';
+import {BrowserRouter as Router,Route, Switch,withRouter } from 'react-router-dom';
 
 class App extends Component {
 
@@ -19,10 +19,11 @@ class App extends Component {
   };
 
   render() {
+    const HomeNavbarWithRouter = withRouter(HomeNavbar);
     return (
       <div className="App">
-       <HomeNavbar/>
        <Router>
+         <HomeNavbarWithRouter/>
        <Switch>
          <Route exact path="/login" component={LoginPage}/>
          <Route exact path="/addEvent" component={addEvent}/>

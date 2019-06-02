@@ -82,4 +82,9 @@ input {
 .col {
   padding: 0.7%;
 }
+
+h1, h2 {
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
+}
 /*# sourceMappingURL=main.css.map */

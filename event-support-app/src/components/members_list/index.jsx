@@ -56,7 +56,7 @@ class MembersList extends React.Component {
       }
     };
 
-    axios.get("/guides").then(res => {
+    axios.get("/guides", config).then(res => {
       console.log(res);
       this.setState({
         members: res.data
@@ -76,7 +76,7 @@ class MembersList extends React.Component {
           }}
         >
           <Col>
-            <ListGroupItem>{member.name}</ListGroupItem>
+            <ListGroupItem>{member.username}</ListGroupItem>
           </Col>
         </Row>
       </a>

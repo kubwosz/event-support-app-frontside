@@ -166,36 +166,33 @@ class EventDetails extends React.Component {
           <Jumbotron id="jumbotronGuides" fluid>
             <Container>
               <h4>Przewodnik:</h4>
-              <p> Daniel Piotrkowski</p>
-              <p> organizator@mail.com</p>
-
+              Daniel Piotrkowski organizator@mail.com
               <h4>Nasz łącznik</h4>
-              <p>Jan Kowalski</p>
+              Jan Kowalski
             </Container>
           </Jumbotron>
 
           <Jumbotron id="jumbotronCosts" fluid>
             <Container>
-              <h3>Całkowity koszt wyjazdu:</h3>
-              <p> 1200.00 PLN</p>
-
-              <h3>Na osobę:</h3>
-              <p>100.00PLN</p>
+              <h4>Całkowity koszt wyjazdu:</h4>
+              1200.00 PLN
+              <h4>Na osobę:</h4>
+              100.00PLN
             </Container>
           </Jumbotron>
 
           <Jumbotron id="jumbotronCostsOther" fluid>
             <Container>
-              <h4>Całkowity koszt zakupów:</h4>
+              <h5>Całkowity koszt zakupów:</h5>
               <p> 1000.00PLN</p>
-              <h4>Dzielony koszt zakupów:</h4>
+              <h5>Dzielony koszt zakupów:</h5>
               <p> 600.00PLN</p>
-              <h4>Dzielony koszt zakupów na osobę:</h4>
+              <h5>Dzielony koszt zakupów na osobę:</h5>
               <p> 50.00PLN</p>
               <p />
-              <h4>Całkowity koszt paliwa:</h4>
+              <h5>Całkowity koszt paliwa:</h5>
               <p> 1000.00PLN</p>
-              <h4>Koszt paliwa na osobę:</h4>
+              <h5>Koszt paliwa na osobę:</h5>
               <p> 50.00PLN</p>
             </Container>
           </Jumbotron>
