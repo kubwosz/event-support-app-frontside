@@ -40,7 +40,7 @@ class EventDetails extends React.Component {
         Authorization: token
       },
       params: {
-        id: this.props.match.params.id
+        id: parseInt(this.props.match.params.id) + 1
       }
     };
 

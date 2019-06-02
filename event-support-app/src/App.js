@@ -7,6 +7,7 @@ import MembersList from './components/members_list';
 import EventsList from './components/events_list';
 import EventDetails from './components/event_details';
 import addEvent from './components/add_event';
+import UserDetails from './components/user_details';
 import {BrowserRouter as Router,Route, Switch } from 'react-router-dom';
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
          <Route exact path="/members" component={MembersList}/>
          <Route exact path="/event/:id" component={EventDetails}/>
          <Route exact path="/events" component={EventsList}/>
+         <Route exact path="/user/:id" component={UserDetails}/>
          <Route path="/" component={EventsList}/>
        </Switch>
        </Router>
