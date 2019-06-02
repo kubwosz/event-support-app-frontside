@@ -23,18 +23,3 @@
     justify-content: center;
     margin: 20%;
 }
-
-.page-link{
-    background-color: rgb(23, 34, 4);
-    border-color: rgb(134, 134, 134);
-    color: white;
-}
-
-.page-item.active .page-link{
-    background-color: rgb(84, 156, 43);
-    border-color: rgb(134, 134, 134);
-}
-
-.nav-tabs{
-    border-radius: 25px;
-}

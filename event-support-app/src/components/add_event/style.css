@@ -1,12 +1,5 @@
-input{
-    margin-left: 0.5%;
-    border-radius: 10px;
-}
 
 #inputGroup-sizing-default{
     border-radius: 10px;
 }
 
-.input-group>.form-control:not(:first-child){
-    border-radius: 10px;
-}
