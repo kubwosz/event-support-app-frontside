@@ -10,8 +10,11 @@
 }
 
 #eventRight .jumbotron-fluid{
-    padding: 1%;
     margin:2%;
+    text-align: left;
+    padding-left: 5%;
+    padding-top: 3%;
+    padding-bottom: 3%;
 }
 
 #eventJumbotronMain{

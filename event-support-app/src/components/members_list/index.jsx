@@ -56,10 +56,10 @@ class MembersList extends React.Component {
       }
     };
 
-    axios.get("/guides", config).then(res => {
+    axios.get("/users", config).then(res => {
       console.log(res);
       this.setState({
-        members: res.data
+        members: res.data._embedded.users
       });
     });
   }

@@ -20,7 +20,8 @@ class HomeNavbar extends React.Component {
   componentDidMount() {
     const token = localStorage.getItem("token");
     console.log(token);
-    if (token == null) {
+    if (token == null && this.props.history.location.pathname != "/register") {
+      console.log(this.props.history);
       this.props.history.push("/login");
     }
   }

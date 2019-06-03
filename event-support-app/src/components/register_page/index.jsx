@@ -99,16 +99,6 @@ export default class RegisterPage extends React.Component {
               validated={formValidated}
               onSubmit={e => this.handleSubmit(e)}
             >
-              <Form.Group as={Col} controlId="formGridName">
-                <Form.Label>Imię</Form.Label>
-                <Form.Control placeholder="Imię" />
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridSurname">
-                <Form.Label>Nazwisko</Form.Label>
-                <Form.Control placeholder="Nazwisko" />
-              </Form.Group>
-
               <Form.Group as={Col} controlId="formGridUsername">
                 <Form.Label>Ksywa</Form.Label>
                 <Form.Control
