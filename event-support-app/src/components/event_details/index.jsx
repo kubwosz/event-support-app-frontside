@@ -47,6 +47,7 @@ class EventDetails extends React.Component {
     axios
       .get("/events", config)
       .then(res => {
+        console.log("res");
         console.log(res);
         this.setState(
           {
@@ -58,6 +59,7 @@ class EventDetails extends React.Component {
         );
       })
       .catch(err => {
+        console.log("err");
         console.log(err);
       });
   }
@@ -156,6 +158,23 @@ class EventDetails extends React.Component {
                     <b>Lider:</b> {this.state.event.participantsLeader}
                   </ListGroup.Item>
                   <b>Lista uczestników:</b>
+                </ListGroup>
+              </Tab>
+
+              <Tab eventKey="purchases" title="Do kupienia">
+                <ListGroup variant="flush">
+                  <ListGroup.Item>
+                    <b>Przedmiot:</b> Bazooka
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <b>Koszt:</b> 1,50zł
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <b>Status:</b> W drodze z Iranu
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    <b>Koszty dystrybucji:</b> 50zł
+                  </ListGroup.Item>
                 </ListGroup>
               </Tab>
             </Tabs>
