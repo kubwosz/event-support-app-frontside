@@ -10,6 +10,7 @@ import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import "./style.css";
 import axios from "axios";
+import moment from "moment";
 
 class EventsList extends React.Component {
   constructor() {
@@ -56,13 +57,14 @@ class EventsList extends React.Component {
         <Card
           className="grid-item"
           onClick={() => {
-            this.props.history.push("/event/" + index);
+            this.props.history.push("/event/" + event.id);
           }}
         >
           <Card.Body>
             <Card.Title>{event.name}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
-              {event.startDate} - {event.endDate}
+              {moment(event.startDate).format("DD-MM-YYYY, HH:mm")} -{" "}
+              {moment(event.endDate).format("DD-MM-YYYY, HH:mm")}
             </Card.Subtitle>
             <Card.Text>
               Dokładny opis {event.meetingLocation} o tym co i jak zabrać, w

@@ -23,5 +23,68 @@ a:hover{
     color: white;
 }
 
+.jumbotron-fluid{
+    background-color: rgb(119, 138, 92);
+    border-radius: 25px;
+}
+
+.input-group>.form-control:not(:first-child){
+    border-radius: 10px;
+}
+
+input{
+    margin-left: 0.5%;
+    border-radius: 10px;
+}
+
+.grid-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-group-item{
+    background-color: rgb(39, 49, 33);
+    border-color: white; 
+}
+
+.nav-tabs .nav-link.active{
+    border-color: rgb(173, 172, 172) rgb(173, 172, 172)rgb(39, 49, 33);
+    background-color: rgb(39, 49, 33); 
+    color: rgb(182, 184, 179);
+    font-weight: 700;
+}
+
+.nav-tabs {
+    border-radius: 0px;
+    border-color: rgb(173, 172, 172);
+}
+
+.nav-tabs .nav-link{
+    color: rgb(214, 224, 198);
+}
 
 
+.page-link{
+    background-color: rgb(23, 34, 4);
+    border-color: rgb(134, 134, 134);
+    color: white;
+}
+
+.page-item.active .page-link{
+    background-color: rgb(84, 156, 43);
+    border-color: rgb(134, 134, 134);
+}
+
+.nav-tabs{
+    border-radius: 25px;
+}
+
+.col{
+    padding: 0.7%;
+}
+
+h1,h2{
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+}

@@ -4,8 +4,9 @@ import { FormControl, Button, Form, Container } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
+import { withRouter } from "react-router-dom";
 
-export default class HomeNavbar extends React.Component {
+class HomeNavbar extends React.Component {
   checkAuth = () => {
     const token = localStorage.getItem("token");
     console.log(token);
@@ -16,6 +17,14 @@ export default class HomeNavbar extends React.Component {
     }
   };
 
+  componentDidMount() {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    if (token == null && this.props.history.location.pathname != "/register") {
+      console.log(this.props.history);
+      this.props.history.push("/login");
+    }
+  }
   logOut = () => {
     console.log("infoWylogowany");
     localStorage.clear();
@@ -101,3 +110,4 @@ export default class HomeNavbar extends React.Component {
     );
   }
 }
+export default withRouter(HomeNavbar);

@@ -16,4 +16,75 @@ a {
 a:hover {
   color: white;
 }
+
+.jumbotron-fluid {
+  background-color: #778a5c;
+  border-radius: 25px;
+}
+
+.input-group > .form-control:not(:first-child) {
+  border-radius: 10px;
+}
+
+input {
+  margin-left: 0.5%;
+  border-radius: 10px;
+}
+
+.grid-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.list-group-item {
+  background-color: #273121;
+  border-color: white;
+}
+
+.nav-tabs .nav-link.active {
+  border-color: #adacac #adacac #273121;
+  background-color: #273121;
+  color: #b6b8b3;
+  font-weight: 700;
+}
+
+.nav-tabs {
+  border-radius: 0px;
+  border-color: #adacac;
+}
+
+.nav-tabs .nav-link {
+  color: #d6e0c6;
+}
+
+.page-link {
+  background-color: #172204;
+  border-color: #868686;
+  color: white;
+}
+
+.page-item.active .page-link {
+  background-color: #549c2b;
+  border-color: #868686;
+}
+
+.nav-tabs {
+  border-radius: 25px;
+}
+
+.col {
+  padding: 0.7%;
+}
+
+h1, h2 {
+  font-weight: bold;
+  font-family: "Times New Roman", Times, serif;
+}
 /*# sourceMappingURL=main.css.map */

@@ -56,10 +56,10 @@ class MembersList extends React.Component {
       }
     };
 
-    axios.get("/guides").then(res => {
+    axios.get("/users", config).then(res => {
       console.log(res);
       this.setState({
-        members: res.data
+        members: res.data._embedded.users
       });
     });
   }
@@ -76,7 +76,7 @@ class MembersList extends React.Component {
           }}
         >
           <Col>
-            <ListGroupItem>{member.name}</ListGroupItem>
+            <ListGroupItem>{member.username}</ListGroupItem>
           </Col>
         </Row>
       </a>
