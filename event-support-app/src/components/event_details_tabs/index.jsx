@@ -9,12 +9,27 @@ export default class EventDetailsTabs extends React.Component {
   constructor() {
     super();
     this.state = {
-      event: {}
+      token: "",
+      event: {},
+      task: {},
+      gear: {},
+      purchase: {}
     };
   }
 
   componentDidMount() {
     this.getEvent();
+    this.getToken();
+    //promise.then();
+  }
+
+  getToken() {
+    const tkn = localStorage.getItem("token");
+    this.setState({ token: tkn }, () => {
+      this.getData("task");
+      this.getData("gear");
+      this.getData("purchase");
+    });
   }
 
   getEvent() {
@@ -23,8 +38,118 @@ export default class EventDetailsTabs extends React.Component {
     });
   }
 
+  getData = type => {
+    console.log("TASKS");
+    console.log(this.props);
+    console.log(this.state);
+    var config = {
+      headers: {
+        Authorization: this.state.token
+      }
+    };
+    axios
+      .get("/" + type + "s", config)
+      .then(res => {
+        console.log("res2");
+        console.log(res);
+        this.setState({
+          [type]: res.data[0]
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+
+  // getPurchases() {
+  //   var config = {
+  //     headers: {
+  //       Authorization: this.state.token
+  //     },
+  //     params: {
+  //       id: parseInt(this.props.match.params.id)
+  //     }
+  //   };
+  //   axios
+  //     .get("/purchases", config)
+  //     .then(res => {
+  //       this.setState({
+  //         purchases: res.data[0]
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
+
+  // getCargos() {
+  //   var config = {
+  //     headers: {
+  //       Authorization: this.state.token
+  //     },
+  //     params: {
+  //       id: parseInt(this.props.match.params.id)
+  //     }
+  //   };
+  //   axios
+  //     .get("/cargos", config)
+  //     .then(res => {
+  //       this.setState({
+  //         cargos: res.data[0]
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
+
+  // getGears() {
+  //   var config = {
+  //     headers: {
+  //       Authorization: this.state.token
+  //     },
+  //     params: {
+  //       id: parseInt(this.props.match.params.id)
+  //     }
+  //   };
+  //   axios
+  //     .get("/gears", config)
+  //     .then(res => {
+  //       this.setState({
+  //         cargos: res.data[0]
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
+
+  // getTasks() {
+  //   var config = {
+  //     headers: {
+  //       Authorization: this.state.token
+  //     },
+  //     params: {
+  //       id: parseInt(this.props.match.params.id)
+  //     }
+  //   };
+  //   axios
+  //     .get("/tasks", config)
+  //     .then(res => {
+  //       this.setState({
+  //         cargos: res.data[0]
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  // }
+
   render() {
-    let event = this.props.event;
+    console.log("this.state");
+    console.log(this.state);
+    let { event, task, gear, purchase } = this.state;
+
     return (
       <div id="EventInformations">
         <Tabs defaultActiveKey="main" id="uncontrolled-tab-example">
@@ -90,10 +215,10 @@ export default class EventDetailsTabs extends React.Component {
           <Tab eventKey="tasks" title="Zadania">
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <b>Status:</b> {event.TasksStatus}
+                <b>Status:</b> {task.status}
               </ListGroup.Item>
               <ListGroup.Item>
-                <b>Opis:</b> {event.TasksDescription}
+                <b>Opis:</b> {task.description}
               </ListGroup.Item>
             </ListGroup>
           </Tab>

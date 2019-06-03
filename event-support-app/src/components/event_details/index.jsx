@@ -43,7 +43,7 @@ class EventDetails extends React.Component {
         Authorization: token
       },
       params: {
-        id: parseInt(this.props.match.params.id) + 1
+        id: parseInt(this.props.match.params.id)
       }
     };
 
@@ -77,13 +77,14 @@ class EventDetails extends React.Component {
               <h1>{event.name}</h1>
               <h2>{event.location}</h2>
               <h5>
-                {moment("2019-07-15T15:00").format("LLLL")}- {event.endDate}
+                {moment(event.startDate).format("LLLL")} -{" "}
+                {moment(event.endDate).format("LLLL")}
               </h5>
               <p />
             </Container>
           </Jumbotron>
 
-          <EventDetailsTabs event={event} />
+          {event.id === 0 ? null : <EventDetailsTabs event={event} />}
         </div>
 
         <div id="eventRight">
