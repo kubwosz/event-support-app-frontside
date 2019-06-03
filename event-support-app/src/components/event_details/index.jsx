@@ -5,6 +5,8 @@ import { withRouter } from "react-router-dom";
 import "./style.css";
 import axios from "axios";
 import EventDetailsTabs from "../event_details_tabs/index";
+import moment from "moment";
+import "moment/locale/pl";
 
 class EventDetails extends React.Component {
   constructor() {
@@ -75,7 +77,7 @@ class EventDetails extends React.Component {
               <h1>{event.name}</h1>
               <h2>{event.location}</h2>
               <h5>
-                {event.startDate} - {event.endDate}
+                {moment("2019-07-15T15:00").format("LLLL")}- {event.endDate}
               </h5>
               <p />
             </Container>
