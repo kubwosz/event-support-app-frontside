@@ -1,9 +1,7 @@
-import React from "react";
-import { Tabs, Tab, Jumbotron, Button, ListGroup } from "react-bootstrap";
-import _ from "lodash";
-import { withRouter } from "react-router-dom";
-import "./style.css";
 import axios from "axios";
+import React from "react";
+import { Button, ListGroup, Tab, Tabs } from "react-bootstrap";
+import "./style.css";
 
 export default class AddEventTabs extends React.Component {
   constructor(props) {

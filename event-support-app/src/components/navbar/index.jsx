@@ -1,11 +1,17 @@
-import React from "react";
-import { Navbar, Nav, NavDropdown, FormGroup } from "react-bootstrap";
-import { FormControl, Button, Form, Container } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
-import "./style.css";
-import { withRouter } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import React from "react";
+import {
+  Button,
+  Container,
+  Form,
+  Nav,
+  Navbar,
+  NavDropdown
+} from "react-bootstrap";
+import { withRouter } from "react-router-dom";
+import "./style.css";
 
 class HomeNavbar extends React.Component {
   checkAuth = () => {
@@ -13,7 +19,7 @@ class HomeNavbar extends React.Component {
     console.log(token);
 
     let isTokenValid = this.checkIfEndpointResponses(token);
-    if (token != null || isTokenValid) {
+    if (token !== null || isTokenValid) {
       return <b style={{ color: "green" }}>Zalogowany</b>;
     } else {
       return <b style={{ color: "red" }}>Niezalogowany</b>;
@@ -41,7 +47,10 @@ class HomeNavbar extends React.Component {
   componentDidMount() {
     const token = localStorage.getItem("token");
     console.log(token);
-    if (token == null && this.props.history.location.pathname != "/register") {
+    if (
+      token === null &&
+      this.props.history.location.pathname !== "/register"
+    ) {
       console.log(this.props.history);
       this.props.history.push("/login");
     }

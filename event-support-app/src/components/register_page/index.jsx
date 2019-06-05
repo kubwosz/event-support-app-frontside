@@ -1,10 +1,16 @@
-import React from "react";
-import { Jumbotron, Container } from "react-bootstrap";
-import { Form, Button, Col } from "react-bootstrap";
-import { Overlay, Tooltip } from "react-bootstrap";
-import "./style.css";
 import axios from "axios";
+import React from "react";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  Jumbotron,
+  Overlay,
+  Tooltip
+} from "react-bootstrap";
 import CarDetails from "../car_details/index";
+import "./style.css";
 
 export default class RegisterPage extends React.Component {
   constructor(...args) {
@@ -33,7 +39,7 @@ export default class RegisterPage extends React.Component {
   };
 
   onChangeCar = val => {
-    let tmp = val.target.value == "Tak" ? true : false;
+    let tmp = val.target.value === "Tak" ? true : false;
     this.setState({ haveCar: tmp });
   };
 

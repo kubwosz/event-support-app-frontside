@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, ListGroupItem } from "react-bootstrap";
+import { Row, Col, ListGroupItem } from "react-bootstrap";
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import "./style.css";

@@ -14,7 +14,7 @@ class App extends Component {
 
   checkAuth = () => {
     const token = localStorage.getItem("token");
-    const refreshToken = localStorage.getItem("refreshToken");
+    // const refreshToken = localStorage.getItem("refreshToken");
     console.log(token);
   };
 

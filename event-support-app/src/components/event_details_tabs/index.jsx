@@ -1,9 +1,7 @@
-import React from "react";
-import { Tabs, Tab, Jumbotron, Container, ListGroup } from "react-bootstrap";
-import _ from "lodash";
-import { withRouter } from "react-router-dom";
-import "./style.css";
 import axios from "axios";
+import React from "react";
+import { ListGroup, Tab, Tabs } from "react-bootstrap";
+import "./style.css";
 
 export default class EventDetailsTabs extends React.Component {
   constructor() {
@@ -60,90 +58,6 @@ export default class EventDetailsTabs extends React.Component {
         console.log(err);
       });
   };
-
-  // getPurchases() {
-  //   var config = {
-  //     headers: {
-  //       Authorization: this.state.token
-  //     },
-  //     params: {
-  //       id: parseInt(this.props.match.params.id)
-  //     }
-  //   };
-  //   axios
-  //     .get("/purchases", config)
-  //     .then(res => {
-  //       this.setState({
-  //         purchases: res.data[0]
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
-
-  // getCargos() {
-  //   var config = {
-  //     headers: {
-  //       Authorization: this.state.token
-  //     },
-  //     params: {
-  //       id: parseInt(this.props.match.params.id)
-  //     }
-  //   };
-  //   axios
-  //     .get("/cargos", config)
-  //     .then(res => {
-  //       this.setState({
-  //         cargos: res.data[0]
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
-
-  // getGears() {
-  //   var config = {
-  //     headers: {
-  //       Authorization: this.state.token
-  //     },
-  //     params: {
-  //       id: parseInt(this.props.match.params.id)
-  //     }
-  //   };
-  //   axios
-  //     .get("/gears", config)
-  //     .then(res => {
-  //       this.setState({
-  //         cargos: res.data[0]
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
-
-  // getTasks() {
-  //   var config = {
-  //     headers: {
-  //       Authorization: this.state.token
-  //     },
-  //     params: {
-  //       id: parseInt(this.props.match.params.id)
-  //     }
-  //   };
-  //   axios
-  //     .get("/tasks", config)
-  //     .then(res => {
-  //       this.setState({
-  //         cargos: res.data[0]
-  //       });
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // }
 
   render() {
     console.log("this.state");

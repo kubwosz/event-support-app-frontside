@@ -1,16 +1,10 @@
-import React from "react";
-import {
-  Card,
-  CardGroup,
-  CardDeck,
-  CardColumns,
-  Pagination
-} from "react-bootstrap";
+import axios from "axios";
 import _ from "lodash";
+import moment from "moment";
+import React from "react";
+import { Card, Pagination } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import "./style.css";
-import axios from "axios";
-import moment from "moment";
 
 class EventsList extends React.Component {
   constructor() {
@@ -59,6 +53,7 @@ class EventsList extends React.Component {
           onClick={() => {
             this.props.history.push("/event/" + event.id);
           }}
+          key={index}
         >
           <Card.Body>
             <Card.Title>{event.name}</Card.Title>

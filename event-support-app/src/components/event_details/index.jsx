@@ -1,12 +1,11 @@
-import React from "react";
-import { Tabs, Tab, Jumbotron, Container, ListGroup } from "react-bootstrap";
-import _ from "lodash";
-import { withRouter } from "react-router-dom";
-import "./style.css";
 import axios from "axios";
-import EventDetailsTabs from "../event_details_tabs/index";
 import moment from "moment";
 import "moment/locale/pl";
+import React from "react";
+import { Container, Jumbotron } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
+import EventDetailsTabs from "../event_details_tabs/index";
+import "./style.css";
 
 class EventDetails extends React.Component {
   constructor() {

@@ -1,9 +1,7 @@
-import React from "react";
-import { FormControl } from "react-bootstrap";
-import { Container, Row, Col, ListGroupItem } from "react-bootstrap";
-import "./style.css";
 import axios from "axios";
-import CarDetails from "../car_details/index";
+import React from "react";
+import { Col, FormControl, ListGroupItem, Row } from "react-bootstrap";
+import "./style.css";
 
 export default class UserDetails extends React.Component {
   constructor() {
