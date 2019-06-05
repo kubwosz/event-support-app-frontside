@@ -45,7 +45,7 @@ class AddEvent extends React.Component {
   render() {
     return (
       <div>
-        <Jumbotron className="JumbotronEvent" fluid>
+        <Jumbotron className="JumbotronEvent jumbotronAddEvent" fluid>
           <Container>
             <InputGroup className="mb-3">
               <InputGroup.Prepend>
