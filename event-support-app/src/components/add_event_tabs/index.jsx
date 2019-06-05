@@ -50,6 +50,7 @@ export default class AddEventTabs extends React.Component {
       this.getData("purchase");
     });
   }
+
   postEventInfo = () => {
     console.log("this.state");
     console.log(this.state);
@@ -80,7 +81,7 @@ export default class AddEventTabs extends React.Component {
     let objectName = str[1].substring(1);
     this.setState({
       [endpointName]: {
-        ...this.state.events,
+        ...this.state[endpointName],
         [objectName]: e.target.value
       }
     });
@@ -200,7 +201,7 @@ export default class AddEventTabs extends React.Component {
               <ListGroup.Item>
                 <b>Koszty dystrybucji:</b>{" "}
                 <input
-                  name="purchases_distributionCosts"
+                  name="purchases_costDistribution"
                   onChange={this.onChange}
                 />
               </ListGroup.Item>

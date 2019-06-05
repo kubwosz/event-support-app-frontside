@@ -85,6 +85,7 @@ class AddEvent extends React.Component {
               <FormControl
                 aria-label="Date"
                 aria-describedby="inputGroup-sizing-default"
+                name="events_startDate"
                 onChange={this.onChange}
               />
             </InputGroup>
