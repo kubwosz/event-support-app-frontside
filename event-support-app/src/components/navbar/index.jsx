@@ -5,17 +5,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 import "./style.css";
 import { withRouter } from "react-router-dom";
+import axios from "axios";
 
 class HomeNavbar extends React.Component {
   checkAuth = () => {
     const token = localStorage.getItem("token");
     console.log(token);
-    if (token != null) {
+
+    let isTokenValid = this.checkIfEndpointResponses(token);
+    if (token != null || isTokenValid) {
       return <b style={{ color: "green" }}>Zalogowany</b>;
     } else {
       return <b style={{ color: "red" }}>Niezalogowany</b>;
     }
   };
+
+  checkIfEndpointResponses(token) {
+    var config = {
+      headers: {
+        Authorization: token
+      }
+    };
+
+    axios
+      .get("/users", config)
+      .then(res => {
+        return true;
+      })
+      .catch(err => {
+        localStorage.removeItem("token");
+        return false;
+      });
+  }
 
   componentDidMount() {
     const token = localStorage.getItem("token");
