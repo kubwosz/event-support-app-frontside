@@ -26,12 +26,14 @@ class EventDetails extends React.Component {
         sharedCost: 0,
         cargoCapacity: 0,
         GearsType: ""
-      }
+      },
+      participants: []
     };
   }
 
   componentDidMount() {
     this.getEvent();
+    this.getParticipants();
   }
 
   getEvent() {
@@ -54,6 +56,36 @@ class EventDetails extends React.Component {
         this.setState(
           {
             event: res.data[0]
+          },
+          () => {
+            console.log(this.state);
+          }
+        );
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  }
+
+  getParticipants() {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      },
+      params: {
+        eventId: parseInt(this.props.match.params.id)
+      }
+    };
+    console.log("dupa");
+    axios
+      .get("/participants", config)
+      .then(res => {
+        this.setState(
+          {
+            participants: res.data
           },
           () => {
             console.log(this.state);
