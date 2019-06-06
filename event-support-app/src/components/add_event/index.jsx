@@ -88,7 +88,6 @@ class AddEvent extends React.Component {
             </InputGroup>
           </Container>
         </Jumbotron>
-        <h1 id="eventInfo">Informacje o wydarzeniu:</h1>
         {this.state.events.id === 0 ? null : (
           <AddEventTabs events={this.state.events} />
         )}

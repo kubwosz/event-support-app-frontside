@@ -79,7 +79,6 @@ class EventDetails extends React.Component {
         eventId: parseInt(this.props.match.params.id)
       }
     };
-    console.log("dupa");
     axios
       .get("/participants", config)
       .then(res => {

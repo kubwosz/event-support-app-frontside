@@ -129,10 +129,10 @@ export default class EventDetailsTabs extends React.Component {
           <Tab eventKey="tasks" title="Zadania">
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <b>Status:</b> {task.status}
+                {/* <b>Status:</b> {task.status} */}
               </ListGroup.Item>
               <ListGroup.Item>
-                <b>Opis:</b> {task.description}
+                {/* <b>Opis:</b> {task.description} */}
               </ListGroup.Item>
             </ListGroup>
           </Tab>

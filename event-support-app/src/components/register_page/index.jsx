@@ -170,6 +170,20 @@ export default class RegisterPage extends React.Component {
               </Form.Group>
 
               <Form.Group>
+                <Form.Label>Status</Form.Label>
+                <Form.Control
+                  onChange={this.onChange}
+                  id="Current_state"
+                  as="select"
+                >
+                  <option>Rekrut</option>
+                  <option>Członek</option>
+                  <option>EAS</option>
+                  <option>Zewnętrzny</option>
+                </Form.Control>
+              </Form.Group>
+
+              <Form.Group>
                 <Form.Label>Czy posiadasz auto?</Form.Label>
                 <Form.Control
                   onChange={this.onChangeCar}

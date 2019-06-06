@@ -1,6 +1,6 @@
 $colors: (
 primary: #005DFF,
-accent: rgb(39, 49, 33)
+accent: rgb(51, 54, 51)
 );
 
 
@@ -11,7 +11,7 @@ body{
 
 .btn-primary{
     margin: 1%;
-    background-color: rgb(84, 156, 43);
+    background-color: rgb(134, 134, 134);
     border-color: rgb(84, 156, 43);
 }
 
@@ -24,7 +24,7 @@ a:hover{
 }
 
 .jumbotron-fluid{
-    background-color: rgb(119, 138, 92);
+    background-color: rgb(175, 175, 175);
     border-radius: 25px;
 }
 
@@ -37,6 +37,11 @@ input{
     border-radius: 10px;
 }
 
+select{
+    margin-left: 0.5%;
+    border-radius: 10px;
+}
+
 .grid-item{
     display: flex;
     justify-content: center;
@@ -44,14 +49,14 @@ input{
 }
 
 .list-group-item{
-    background-color: rgb(39, 49, 33);
+    background-color: rgb(51, 54, 51);
     border-color: white; 
 }
 
 .nav-tabs .nav-link.active{
-    border-color: rgb(173, 172, 172) rgb(173, 172, 172)rgb(39, 49, 33);
-    background-color: rgb(39, 49, 33); 
-    color: rgb(182, 184, 179);
+    border-color: rgb(173, 172, 172) rgb(173, 172, 172)rgb(51, 54, 51);
+    background-color: rgb(51, 54, 51);
+    color: rgb(218, 181, 35);
     font-weight: 700;
 }
 
@@ -61,7 +66,7 @@ input{
 }
 
 .nav-tabs .nav-link{
-    color: rgb(214, 224, 198);
+    color: rgb(218, 181, 35);
 }
 
 
