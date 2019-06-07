@@ -6,7 +6,7 @@ body {
 .btn-primary {
   margin: 1%;
   background-color: #868686;
-  border-color: #549c2b;
+  border-color: #dab523;
 }
 
 a {
@@ -28,12 +28,17 @@ a:hover {
 
 input {
   margin-left: 0.5%;
+  padding-left: 10px;
   border-radius: 10px;
+  min-width: 250px;
+  min-height: 33px;
 }
 
 select {
   margin-left: 0.5%;
   border-radius: 10px;
+  min-width: 250px;
+  min-height: 33px;
 }
 
 .grid-item {
