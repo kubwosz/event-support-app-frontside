@@ -24,13 +24,19 @@ class EventsList extends React.Component {
   }
 
   getAllMembers() {
+    console.log(this.state);
     const token = localStorage.getItem("token");
 
     var config = {
       headers: {
         Authorization: token
+      },
+      params: {
+        page: this.state.activePage - 1,
+        perPage: this.state.eventsPerPage
       }
     };
+    console.log(config);
 
     axios.get("/events", config).then(res => {
       console.log(res);
@@ -41,37 +47,28 @@ class EventsList extends React.Component {
   }
 
   renderEvents = (event, index) => {
-    if (
-      index >=
-        this.state.activePage * this.state.eventsPerPage -
-          this.state.eventsPerPage &&
-      index < this.state.activePage * this.state.eventsPerPage
-    ) {
-      return (
-        <Card
-          className="grid-item"
-          onClick={() => {
-            this.props.history.push("/event/" + event.id);
-          }}
-          key={index}
-        >
-          <Card.Body>
-            <Card.Title>{event.name}</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
-              {moment(event.startDate).format("DD-MM-YYYY, HH:mm")} -{" "}
-              {moment(event.endDate).format("DD-MM-YYYY, HH:mm")}
-            </Card.Subtitle>
-            <Card.Text>
-              Dokładny opis {event.meetingLocation} o tym co i jak zabrać, w
-              jakim miejscu. Więcej informacji po kliknięciu.
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      );
-    }
+    return (
+      <Card
+        className="grid-item"
+        onClick={() => {
+          this.props.history.push("/event/" + event.id);
+        }}
+        key={index}
+      >
+        <Card.Body>
+          <Card.Title>{event.name}</Card.Title>
+          <Card.Subtitle className="mb-2 text-muted">
+            {moment(event.startDate).format("DD-MM-YYYY, HH:mm")} -{" "}
+            {moment(event.endDate).format("DD-MM-YYYY, HH:mm")}
+          </Card.Subtitle>
+          <Card.Text>
+            Dokładny opis {event.meetingLocation} o tym co i jak zabrać, w jakim
+            miejscu. Więcej informacji po kliknięciu.
+          </Card.Text>
+        </Card.Body>
+      </Card>
+    );
   };
-
-  handlePaginationChange = (e, { activePage }) => this.setState({ activePage });
 
   render() {
     const events = _.map(this.state.events, (event, k) => {
@@ -79,13 +76,13 @@ class EventsList extends React.Component {
     });
 
     let items = [];
-    for (let number = 1; number <= 5; number++) {
+    for (let number = 1; number <= this.state.totalPages; number++) {
       items.push(
         <Pagination.Item
           key={number}
           active={number === this.state.activePage}
           onClick={() => {
-            this.setState({ activePage: number });
+            this.setState({ activePage: number }, () => this.getAllMembers());
           }}
         >
           {number}

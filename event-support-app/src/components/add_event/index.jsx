@@ -59,7 +59,7 @@ class AddEvent extends React.Component {
 
   handleDateTimeChangeEnd = date => {
     this.setState({
-      events: { ...this.state.events, startDate: date }
+      events: { ...this.state.events, endDate: date }
     });
   };
 

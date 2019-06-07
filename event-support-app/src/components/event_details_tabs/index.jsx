@@ -81,12 +81,6 @@ export default class EventDetailsTabs extends React.Component {
               <ListGroup.Item>
                 <b>Odległość od miejsca zbiórki:</b> {event.distance}
               </ListGroup.Item>
-              <ListGroup.Item>
-                <b>Rozpoczęcie wydarzenia:</b> 17 maja 2019 13:00
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <b>Zakończenie wydarzenia:</b> 19 maja 2019 18:30
-              </ListGroup.Item>
             </ListGroup>
           </Tab>
 

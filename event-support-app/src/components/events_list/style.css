@@ -3,11 +3,11 @@
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     grid-gap: 5rem;
     margin: 3%;
+    height: 500px;
 }
 
-
 .grid-item{
-    height: auto;
+    height: 170px;
     width: 430px;
     cursor: pointer;
     color: black;
