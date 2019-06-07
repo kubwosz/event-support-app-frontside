@@ -1,8 +1,19 @@
 import React from "react";
-import { Container, FormControl, InputGroup, Jumbotron } from "react-bootstrap";
+import {
+  Container,
+  FormControl,
+  InputGroup,
+  Jumbotron,
+  FormGroup
+} from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import AddEventTabs from "../add_event_tabs/index";
 import "./style.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import pl from "date-fns/locale/pl";
+registerLocale("pl", pl);
 
 class AddEvent extends React.Component {
   constructor() {
@@ -13,8 +24,8 @@ class AddEvent extends React.Component {
         name: "",
         ownersName: "",
         location: "",
-        startDate: "",
-        endDate: "",
+        startDate: new Date(),
+        endDate: new Date(),
         meetingLocation: "",
         distance: 0,
         personalCargoType: "",
@@ -37,6 +48,19 @@ class AddEvent extends React.Component {
       }
     });
     //console.log(this.state);
+  };
+
+  handleDateTimeChangeStart = date => {
+    console.log(date);
+    this.setState({
+      events: { ...this.state.events, startDate: date }
+    });
+  };
+
+  handleDateTimeChangeEnd = date => {
+    this.setState({
+      events: { ...this.state.events, startDate: date }
+    });
   };
 
   render() {
@@ -76,15 +100,34 @@ class AddEvent extends React.Component {
             <InputGroup className="mb-3">
               <InputGroup.Prepend>
                 <InputGroup.Text id="inputGroup-sizing-default">
-                  Data wydarzenia:
+                  Data rozpoczęcia wydarzenia:
                 </InputGroup.Text>
+                <DatePicker
+                  name="startDate"
+                  selected={this.state.events.startDate}
+                  onChange={this.handleDateTimeChangeStart}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="d MMMM, H:mm, yyyy"
+                  timeCaption="time"
+                  locale="pl"
+                />
+                <InputGroup.Text id="inputGroup-sizing-default">
+                  Data zakończenia wydarzenia:
+                </InputGroup.Text>
+                <DatePicker
+                  name="endDate"
+                  selected={this.state.events.endDate}
+                  onChange={this.handleDateTimeChangeEnd}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  dateFormat="d MMMM, H:mm, yyyy"
+                  timeCaption="time"
+                  locale="pl"
+                />
               </InputGroup.Prepend>
-              <FormControl
-                aria-label="Date"
-                aria-describedby="inputGroup-sizing-default"
-                name="events_startDate"
-                onChange={this.onChange}
-              />
             </InputGroup>
           </Container>
         </Jumbotron>

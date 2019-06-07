@@ -122,21 +122,23 @@ export default class AddEventTabs extends React.Component {
                 <b>Odległość od miejsca zbiórki:</b>{" "}
                 <input name="events_meetingLocation" onChange={this.onChange} />
               </ListGroup.Item>
-              <ListGroup.Item>
-                <b>Rozpoczęcie wydarzenia:</b>{" "}
-                <input name="events_startDate" onChange={this.onChange} />
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <b>Zakończenie wydarzenia:</b>{" "}
-                <input name="events_endDate" onChange={this.onChange} />
-              </ListGroup.Item>
             </ListGroup>
           </Tab>
 
           <Tab eventKey="gears" title="Sprzęt">
             <ListGroup variant="flush">
               <ListGroup.Item>
-                <b>Typ:</b> <input name="gears_type" onChange={this.onChange} />
+                <b>Typ: </b>
+                <select
+                  name="gears_type"
+                  onChange={this.onChange}
+                  id="events_personalCargoType"
+                >
+                  <option>Lekki</option>
+                  <option>Ciężki</option>
+                  <option>Bardzo ciężki</option>
+                </select>
+                <ReactTooltip effect="solid" type="info" />
               </ListGroup.Item>
               <ListGroup.Item>
                 <b>Kamuflaż:</b>{" "}
