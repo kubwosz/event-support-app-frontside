@@ -19,12 +19,35 @@
 }
 
 #eventJumbotronMain{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
     height: 300px;
     width: 80%;
     margin: auto;
     margin-top: 0;
+    padding:1%;
 }
+
+#MainInfo{
+    justify-content: center;
+    align-items: center;
+}
+
 
 .jumbotronEvent{
     color: rgb(5, 32, 3);
+}
+
+#EditBtn{
+    justify-self: flex-start;
+    align-self: flex-end;
+    display: inline-block;
+}
+
+
+#RegisterBtn{
+    display: inline-block;
+    justify-self: flex-start;
+    align-self: flex-end;
 }

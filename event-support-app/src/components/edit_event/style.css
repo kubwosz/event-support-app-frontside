@@ -1,0 +1,17 @@
+
+
+#inputGroup-sizing-default{
+    border-radius: 10px;
+}
+
+.jumbotronAddEvent{
+    height: 80%;
+    width: 80%;
+    margin: auto;
+    margin-top: 0;
+}
+
+.react-datepicker-wrapper{
+    margin: 0.5%;
+}
+
