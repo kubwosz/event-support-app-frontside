@@ -27,21 +27,26 @@ class HomeNavbar extends React.Component {
   };
 
   checkIfEndpointResponses(token) {
-    var config = {
-      headers: {
-        Authorization: token
-      }
-    };
+    if (token != null) {
+      var config = {
+        headers: {
+          Authorization: token
+        }
+      };
 
-    axios
-      .get("/users", config)
-      .then(res => {
-        return true;
-      })
-      .catch(err => {
-        localStorage.removeItem("token");
-        return false;
-      });
+      axios
+        .get("/users", config)
+        .then(res => {
+          return true;
+        })
+        .catch(err => {
+          console.log("removing token...");
+          localStorage.removeItem("token");
+          return false;
+        });
+    } else {
+      return false;
+    }
   }
 
   componentDidMount() {
@@ -55,6 +60,7 @@ class HomeNavbar extends React.Component {
       this.props.history.push("/login");
     }
   }
+
   logOut = () => {
     console.log("infoWylogowany");
     localStorage.clear();

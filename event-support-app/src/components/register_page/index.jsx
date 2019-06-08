@@ -16,15 +16,16 @@ export default class RegisterPage extends React.Component {
   constructor(...args) {
     super(...args);
 
-    this.attachRef = target => this.setState({ target });
+    this.attachRefPass = targetPass => this.setState({ targetPass });
+    this.attachRefUser = targetUser => this.setState({ targetUser });
     this.state = {
       username: "",
       email: "",
       password: "",
       password2: "",
-      isPasswordCorrect: true,
       address: "",
-      show: false,
+      showTooltipPass: false,
+      showTooltipUser: false,
       haveCar: false,
       formValidated: false,
       model: "",
@@ -36,6 +37,40 @@ export default class RegisterPage extends React.Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
+    console.log(this.state);
+  };
+
+  onChangeUsername = e => {
+    var config = {
+      headers: {
+        Authorization:
+          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrc2EiLCJleHAiOjE1NTk5OTY2NTF9.RNfud2FaOCsV9yy55pec1IrUAAjN6DJhxyoA3w4T1fkc50jGXb6z4WSTuh4-Q3OMleizqAV_bWGyxhbxjG0Krg"
+      },
+      params: {
+        username: e.target.value
+      }
+    };
+    axios
+      .get("/users/search/findByUsername", config)
+      .then(res => {
+        this.setState({
+          showTooltipUser: true
+        });
+      })
+      .catch(err => {
+        {
+          this.setState({
+            showTooltipUser: false
+          });
+        }
+        console.log("error:");
+        console.log(err);
+      });
+    this.setState({ username: e.target.value });
+  };
+
+  onChangeEmail = e => {
+    this.setState({ email: e.target.value });
   };
 
   onChangeCar = val => {
@@ -44,14 +79,9 @@ export default class RegisterPage extends React.Component {
   };
 
   passwordValidation = () => {
-    this.setState(
-      {
-        isPasswordCorrect: this.state.password === this.state.password2
-      },
-      () => {
-        this.setState({ show: !this.state.isPasswordCorrect });
-      }
-    );
+    this.setState({
+      showTooltipPass: this.state.password === this.state.password2
+    });
   };
 
   registerUser = () => {
@@ -66,7 +96,7 @@ export default class RegisterPage extends React.Component {
       })
       .then(() => {
         window.confirm("Użytkownik zarejestrowany pomyślnie");
-        this.props.history.push("/login/");
+        //this.props.history.push("/login/");
       })
       .catch(err => {
         window.confirm(err);
@@ -88,9 +118,10 @@ export default class RegisterPage extends React.Component {
     const {
       password,
       password2,
-      show,
-      target,
-      isPasswordCorrect,
+      showTooltipPass,
+      showTooltipUser,
+      targetPass,
+      targetUser,
       formValidated
     } = this.state;
 
@@ -111,8 +142,20 @@ export default class RegisterPage extends React.Component {
                   required
                   name="username"
                   placeholder="Ksywa"
-                  onChange={this.onChange}
+                  onChange={this.onChangeUsername}
+                  ref={this.attachRefUser}
                 />
+                <Overlay
+                  target={targetUser}
+                  show={showTooltipUser}
+                  placement="right"
+                >
+                  {props => (
+                    <Tooltip id="overlay-example" {...props}>
+                      Istnieje już taka ksywa w systemie
+                    </Tooltip>
+                  )}
+                </Overlay>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridEmail">
@@ -135,6 +178,7 @@ export default class RegisterPage extends React.Component {
                   placeholder="Hasło"
                   value={password}
                   onChange={this.onChange}
+                  onBlur={this.passwordValidation}
                 />
               </Form.Group>
 
@@ -148,9 +192,13 @@ export default class RegisterPage extends React.Component {
                   value={password2}
                   onChange={this.onChange}
                   onBlur={this.passwordValidation}
-                  ref={this.attachRef}
+                  ref={this.attachRefPass}
                 />
-                <Overlay target={target} show={show} placement="right">
+                <Overlay
+                  target={targetPass}
+                  show={showTooltipPass}
+                  placement="right"
+                >
                   {props => (
                     <Tooltip id="overlay-example" {...props}>
                       Hasła nie są identyczne
@@ -198,7 +246,7 @@ export default class RegisterPage extends React.Component {
               <Button
                 variant="primary"
                 type="submit"
-                disabled={!isPasswordCorrect}
+                disabled={showTooltipPass || showTooltipUser}
               >
                 Zarejestruj
               </Button>
