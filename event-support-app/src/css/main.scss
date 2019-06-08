@@ -1,11 +1,11 @@
-$colors: (
-primary: #005DFF,
-accent: rgb(37, 37, 37)
-);
-
+// $colors: (
+// primary: #005DFF,
+// main-background: rgb(37, 37, 37)
+// );
+$main-background: rgb(37, 37, 37);
 
 body{
-    background-color: map-get($colors,accent);
+    background-color: $main-background;
     color: rgb(245, 247, 243);
 }
 
@@ -24,7 +24,7 @@ a:hover{
 }
 
 .jumbotron-fluid{
-    background-color: rgb(175, 175, 175);
+    background-color: rgb(46, 46, 46);
     border-radius: 25px;
 }
 
@@ -54,13 +54,13 @@ select{
 }
 
 .list-group-item{
-    background-color: rgb(51, 54, 51);
+    background-color: $main-background;
     border-color: white; 
 }
 
 .nav-tabs .nav-link.active{
-    border-color: rgb(173, 172, 172) rgb(173, 172, 172)rgb(51, 54, 51);
-    background-color: rgb(51, 54, 51);
+    border-color: rgb(173, 172, 172) rgb(173, 172, 172)$main-background;
+    background-color: $main-background;
     color: rgb(218, 181, 35);
     font-weight: 700;
 }

@@ -18,7 +18,7 @@ a:hover {
 }
 
 .jumbotron-fluid {
-  background-color: #afafaf;
+  background-color: #2e2e2e;
   border-radius: 25px;
 }
 
@@ -54,13 +54,13 @@ select {
 }
 
 .list-group-item {
-  background-color: #333633;
+  background-color: #252525;
   border-color: white;
 }
 
 .nav-tabs .nav-link.active {
-  border-color: #adacac #adacac #333633;
-  background-color: #333633;
+  border-color: #adacac #adacac #252525;
+  background-color: #252525;
   color: #dab523;
   font-weight: 700;
 }

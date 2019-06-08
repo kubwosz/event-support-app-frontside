@@ -15,7 +15,6 @@
     padding-left: 5%;
     padding-top: 3%;
     padding-bottom: 3%;
-    color: rgb(5, 32, 3);
 }
 
 #eventJumbotronMain{
@@ -32,11 +31,6 @@
 #MainInfo{
     justify-content: center;
     align-items: center;
-}
-
-
-.jumbotronEvent{
-    color: rgb(5, 32, 3);
 }
 
 #EditBtn{
