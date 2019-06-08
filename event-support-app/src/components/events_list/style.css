@@ -10,8 +10,7 @@
     height: 170px;
     width: 430px;
     cursor: pointer;
-    color: black;
-    background-color: rgb(78, 78, 78)
+    background-color: rgb(53, 53, 53);
 }
 
 #EventsList{

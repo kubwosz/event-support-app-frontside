@@ -6,6 +6,7 @@ import { Container, Jumbotron, Button } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import EventDetailsTabs from "../event_details_tabs/index";
 import "./style.css";
+import _ from "lodash";
 
 class EventDetails extends React.Component {
   constructor() {
@@ -97,25 +98,46 @@ class EventDetails extends React.Component {
       });
   }
 
+  returnDate = event => {
+    let startDate = moment(event.startDate);
+    let endDate = moment(event.endDate);
+    let component = {};
+
+    if (startDate.isValid() && endDate.isValid()) {
+      component = (
+        <h5>
+          {startDate.format("LLLL")} - {endDate.format("LLLL")}
+        </h5>
+      );
+    } else {
+      component = <h5>Brak ustalonej daty</h5>;
+    }
+
+    return component;
+  };
+
   render() {
     let event = this.state.event;
+
+    const dates = this.returnDate(event);
     return (
       <div id="eventDetailsPage">
         <div id="eventLeft">
           <Jumbotron className="jumbotronEvent" id="eventJumbotronMain" fluid>
             <Button
               id="EditBtn"
-              onClick={() => this.props.history.push("/event/9/edit")}
+              onClick={() =>
+                this.props.history.push(
+                  "/event/" + this.props.match.params.id + "/edit"
+                )
+              }
             >
               Edytuj wydarzenie
             </Button>
             <Container id="MainInfo">
               <h1>{event.name}</h1>
               <h2>{event.location}</h2>
-              <h5>
-                {moment(event.startDate).format("LLLL")} -{" "}
-                {moment(event.endDate).format("LLLL")}
-              </h5>
+              {dates}
               <p />
             </Container>
             <Button id="RegisterBtn">Zapisz się na wydarzenie</Button>

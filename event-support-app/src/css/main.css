@@ -1,11 +1,17 @@
 body {
-  background-color: #252525;
-  color: #f5f7f3;
+  background-color: #222222;
+  color: #b4b4b4;
 }
 
 .btn-primary {
   margin: 1%;
   background-color: #868686;
+  border-color: #dab523;
+}
+
+.btn-primary:hover {
+  margin: 1%;
+  background-color: #dab523;
   border-color: #dab523;
 }
 
@@ -18,7 +24,7 @@ a:hover {
 }
 
 .jumbotron-fluid {
-  background-color: #2e2e2e;
+  background-color: #272727;
   border-radius: 25px;
 }
 
@@ -54,13 +60,13 @@ select {
 }
 
 .list-group-item {
-  background-color: #252525;
+  background-color: #222222;
   border-color: white;
 }
 
 .nav-tabs .nav-link.active {
-  border-color: #adacac #adacac #252525;
-  background-color: #252525;
+  border-color: #adacac #adacac #222222;
+  background-color: #222222;
   color: #dab523;
   font-weight: 700;
 }

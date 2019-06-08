@@ -2,16 +2,22 @@
 // primary: #005DFF,
 // main-background: rgb(37, 37, 37)
 // );
-$main-background: rgb(37, 37, 37);
+$main-background: rgb(34, 34, 34);
 
 body{
     background-color: $main-background;
-    color: rgb(245, 247, 243);
+    color: rgb(180, 180, 180);
 }
 
 .btn-primary{
     margin: 1%;
     background-color: rgb(134, 134, 134);
+    border-color: rgb(218, 181, 35);
+}
+
+.btn-primary:hover{
+    margin: 1%;
+    background-color: rgb(218, 181, 35);
     border-color: rgb(218, 181, 35);
 }
 
@@ -24,7 +30,7 @@ a:hover{
 }
 
 .jumbotron-fluid{
-    background-color: rgb(46, 46, 46);
+    background-color: rgb(39, 39, 39);
     border-radius: 25px;
 }
 

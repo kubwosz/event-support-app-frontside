@@ -34,6 +34,7 @@ export default class EditEvent extends React.Component {
   componentDidMount() {
     this.getEvent();
   }
+
   getEvent() {
     const token = localStorage.getItem("token");
 

@@ -50,7 +50,7 @@ export default class EditEventTabs extends React.Component {
     });
   }
 
-  postEventInfo = () => {
+  putEventInfo = () => {
     console.log("this.state");
     console.log(this.state);
     const token = localStorage.getItem("token");
@@ -58,15 +58,18 @@ export default class EditEventTabs extends React.Component {
     var config = {
       headers: {
         Authorization: token
+      },
+      params: {
+        id: this.state.events.id
       }
     };
 
     console.log(this.state);
     axios
-      .post("/events", this.state.events, config)
+      .put("/events", this.state.events, config)
       .then(response => {
         console.log(response);
-        window.confirm("Wydarzenie dodane pomyślnie");
+        window.confirm("Wydarzenie edytowane pomyślnie");
       })
       .catch(err => {
         console.log(err);
@@ -156,7 +159,7 @@ export default class EditEventTabs extends React.Component {
           </Tab>
         </Tabs>
 
-        <Button onClick={this.postEventInfo}> Zapisz dane </Button>
+        <Button onClick={this.putEventInfo}> Zapisz dane </Button>
       </div>
     );
   }
