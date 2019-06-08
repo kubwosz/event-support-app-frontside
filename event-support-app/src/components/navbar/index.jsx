@@ -12,17 +12,24 @@ import {
 } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import "./style.css";
+import decode from "jwt-decode";
 
 class HomeNavbar extends React.Component {
   checkAuth = () => {
     const token = localStorage.getItem("token");
-    console.log(token);
+    if (token != null) {
+      console.log(token);
+      const tokenDecoded = decode(token); //sub exp
+      if (tokenDecoded.exp >= 0) {
+        console.log("user name");
+        console.log(tokenDecoded.sub);
+      }
 
-    let isTokenValid = this.checkIfEndpointResponses(token);
-    if (token !== null || isTokenValid) {
-      return <b style={{ color: "green" }}>Zalogowany</b>;
-    } else {
-      return <b style={{ color: "red" }}>Niezalogowany</b>;
+      if (token !== null || tokenDecoded.exp > 0) {
+        return <b style={{ color: "green" }}>Zalogowany</b>;
+      } else {
+        return <b style={{ color: "red" }}>Niezalogowany</b>;
+      }
     }
   };
 

@@ -80,7 +80,7 @@ export default class RegisterPage extends React.Component {
 
   passwordValidation = () => {
     this.setState({
-      showTooltipPass: this.state.password === this.state.password2
+      showTooltipPass: this.state.password !== this.state.password2
     });
   };
 
@@ -142,7 +142,7 @@ export default class RegisterPage extends React.Component {
                   required
                   name="username"
                   placeholder="Ksywa"
-                  onChange={this.onChangeUsername}
+                  onChange={this.onChange}
                   ref={this.attachRefUser}
                 />
                 <Overlay

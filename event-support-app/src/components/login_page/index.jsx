@@ -24,10 +24,8 @@ export default class LoginPage extends React.Component {
         password: this.state.password
       })
       .then(response => {
-        console.log(response);
         localStorage.setItem("token", response.headers.authorization);
         this.props.history.push("/events");
-        // window.location.reload();
       })
       .catch(err => {
         window.confirm(err);
