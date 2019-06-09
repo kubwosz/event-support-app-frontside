@@ -69,6 +69,27 @@ class EventDetails extends React.Component {
       });
   }
 
+  deleteEvent = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      }
+    };
+
+    axios
+      .delete("/events" + "/" + this.state.event.id, config)
+      .then(res => {
+        this.props.history.push("/events");
+        window.confirm("Usunięto pomyślnie");
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  };
+
   getParticipants() {
     const token = localStorage.getItem("token");
 
@@ -133,6 +154,9 @@ class EventDetails extends React.Component {
               }
             >
               Edytuj wydarzenie
+            </Button>
+            <Button id="EditBtn" onClick={() => this.deleteEvent()}>
+              Usuń
             </Button>
             <Container id="MainInfo">
               <h1>{event.name}</h1>

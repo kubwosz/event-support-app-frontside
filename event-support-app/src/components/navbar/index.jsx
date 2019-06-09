@@ -20,24 +20,23 @@ class HomeNavbar extends React.Component {
     if (token != null) {
       console.log(token);
       const tokenDecoded = decode(token); //sub exp
-      if (tokenDecoded.exp >= 0) {
-        console.log("user name");
-        console.log(tokenDecoded.sub);
-        console.log("user id");
-        this.getUserId(token, tokenDecoded.sub);
-        console.log();
+      console.log("user name");
+      console.log(tokenDecoded.exp);
+      console.log("user id");
+      this.getUserId(token, tokenDecoded.sub);
+      console.log();
 
-        if (token !== null) {
-          return <b style={{ color: "green" }}>Zalogowany</b>;
-        } else {
-          return <b style={{ color: "red" }}>Niezalogowany</b>;
-        }
+      if (token !== null) {
+        return <b style={{ color: "green" }}>Zalogowany</b>;
+      } else {
+        return <b style={{ color: "red" }}>Niezalogowany</b>;
       }
     }
   };
 
   getUserId(token, username) {
     console.log("getuserid");
+    console.log(username);
     var config = {
       headers: {
         Authorization: token
@@ -52,11 +51,8 @@ class HomeNavbar extends React.Component {
         console.log(res);
         let urlWithId = res.data._links.self.href;
         var result = /[^/]*$/.exec(urlWithId)[0];
-        console.log("result");
-        console.log(result);
-        // var str = "foo/bar/test.html";
-        // var n = str.lastIndexOf("/");
-        // var result = str.substring(n + 1);
+
+        localStorage.setItem("userId", result);
       })
       .catch(err => {
         console.log("error2:");

@@ -9,7 +9,17 @@ export default class AddEventTabs extends React.Component {
     super(props);
     this.state = {
       token: "",
-      events: {},
+      events: {
+        ownerId: 0,
+        guideId: 0,
+        name: "",
+        startDate: "",
+        endDate: "",
+        location: "",
+        meetingLocation: "",
+        personalCargoType: "",
+        distance: 315.0
+      },
       tasks: {
         taskEventId: 0,
         userId: 0,
@@ -31,6 +41,16 @@ export default class AddEventTabs extends React.Component {
         costDistribution: ""
       }
     };
+  }
+
+  componentDidMount() {
+    const ownerId = localStorage.getItem("userId");
+    this.setState({
+      events: {
+        ...this.state.events,
+        ownerId: ownerId
+      }
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
