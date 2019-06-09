@@ -23,15 +23,46 @@ class HomeNavbar extends React.Component {
       if (tokenDecoded.exp >= 0) {
         console.log("user name");
         console.log(tokenDecoded.sub);
-      }
+        console.log("user id");
+        this.getUserId(token, tokenDecoded.sub);
+        console.log();
 
-      if (token !== null || tokenDecoded.exp > 0) {
-        return <b style={{ color: "green" }}>Zalogowany</b>;
-      } else {
-        return <b style={{ color: "red" }}>Niezalogowany</b>;
+        if (token !== null) {
+          return <b style={{ color: "green" }}>Zalogowany</b>;
+        } else {
+          return <b style={{ color: "red" }}>Niezalogowany</b>;
+        }
       }
     }
   };
+
+  getUserId(token, username) {
+    console.log("getuserid");
+    var config = {
+      headers: {
+        Authorization: token
+      },
+      params: {
+        username: username
+      }
+    };
+    axios
+      .get("/users/search/findByUsername", config)
+      .then(res => {
+        console.log(res);
+        let urlWithId = res.data._links.self.href;
+        var result = /[^/]*$/.exec(urlWithId)[0];
+        console.log("result");
+        console.log(result);
+        // var str = "foo/bar/test.html";
+        // var n = str.lastIndexOf("/");
+        // var result = str.substring(n + 1);
+      })
+      .catch(err => {
+        console.log("error2:");
+        console.log(err);
+      });
+  }
 
   checkIfEndpointResponses(token) {
     if (token != null) {

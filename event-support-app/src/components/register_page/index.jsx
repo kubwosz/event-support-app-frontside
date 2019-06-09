@@ -99,7 +99,12 @@ export default class RegisterPage extends React.Component {
         //this.props.history.push("/login/");
       })
       .catch(err => {
-        window.confirm(err);
+        console.log(err);
+        if (err.toString().includes("409")) {
+          window.confirm("Istnieje użytkownik o takiej ksywie!");
+        } else {
+          window.confirm(err);
+        }
       });
   };
 

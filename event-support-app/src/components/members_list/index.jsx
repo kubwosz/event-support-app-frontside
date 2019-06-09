@@ -73,6 +73,8 @@ class MembersList extends React.Component {
             this.setState({
               activeMemberId: member.id
             });
+            console.log("this.state");
+            console.log(member);
           }}
         >
           <Col>
