@@ -28,10 +28,12 @@ export default class RegisterPage extends React.Component {
       showTooltipUser: false,
       haveCar: false,
       formValidated: false,
-      model: "",
-      combustion: 0,
-      peopleCapacity: 0,
-      cargoCapacity: 0
+      car: {
+        model: "",
+        combustion: 0,
+        peopleCapacity: 0,
+        cargoCapacity: 0
+      }
     };
   }
 
@@ -39,34 +41,34 @@ export default class RegisterPage extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  onChangeUsername = e => {
-    var config = {
-      headers: {
-        Authorization:
-          "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrc2EiLCJleHAiOjE1NTk5OTY2NTF9.RNfud2FaOCsV9yy55pec1IrUAAjN6DJhxyoA3w4T1fkc50jGXb6z4WSTuh4-Q3OMleizqAV_bWGyxhbxjG0Krg"
-      },
-      params: {
-        username: e.target.value
-      }
-    };
-    axios
-      .get("/users/search/findByUsername", config)
-      .then(res => {
-        this.setState({
-          showTooltipUser: true
-        });
-      })
-      .catch(err => {
-        {
-          this.setState({
-            showTooltipUser: false
-          });
-        }
-        console.log("error:");
-        console.log(err);
-      });
-    this.setState({ username: e.target.value });
-  };
+  // onChangeUsername = e => {
+  //   var config = {
+  //     headers: {
+  //       Authorization:
+  //         "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrc2EiLCJleHAiOjE1NTk5OTY2NTF9.RNfud2FaOCsV9yy55pec1IrUAAjN6DJhxyoA3w4T1fkc50jGXb6z4WSTuh4-Q3OMleizqAV_bWGyxhbxjG0Krg"
+  //     },
+  //     params: {
+  //       username: e.target.value
+  //     }
+  //   };
+  //   axios
+  //     .get("/users/search/findByUsername", config)
+  //     .then(res => {
+  //       this.setState({
+  //         showTooltipUser: true
+  //       });
+  //     })
+  //     .catch(err => {
+  //       {
+  //         this.setState({
+  //           showTooltipUser: false
+  //         });
+  //       }
+  //       console.log("error:");
+  //       console.log(err);
+  //     });
+  //   this.setState({ username: e.target.value });
+  // };
 
   onChangeEmail = e => {
     this.setState({ email: e.target.value });
@@ -92,8 +94,9 @@ export default class RegisterPage extends React.Component {
         password: this.state.password,
         vehicle: this.state.haveCar
       })
-      .then(() => {
+      .then(res => {
         window.confirm("Użytkownik zarejestrowany pomyślnie");
+        console.log(res);
         this.props.history.push("/login/");
       })
       .catch(err => {
@@ -105,6 +108,8 @@ export default class RegisterPage extends React.Component {
         }
       });
   };
+
+  addCar = () => {};
 
   handleSubmit(event) {
     const form = event.currentTarget;
@@ -244,7 +249,7 @@ export default class RegisterPage extends React.Component {
                   <option>Tak</option>
                 </Form.Control>
               </Form.Group>
-              {this.state.haveCar ? <CarDetails /> : null}
+              {/* {this.state.haveCar ? <CarDetails car={this.state.car} /> : null} */}
               <Button
                 variant="primary"
                 type="submit"

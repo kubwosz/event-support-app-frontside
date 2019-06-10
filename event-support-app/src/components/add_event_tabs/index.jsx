@@ -68,7 +68,7 @@ export default class AddEventTabs extends React.Component {
         Authorization: token
       }
     };
-
+    console.log(this.state);
     axios
       .post("/events", this.state.events, config)
       .then(response => {
@@ -80,9 +80,15 @@ export default class AddEventTabs extends React.Component {
   };
 
   onChange = e => {
+    console.log(e.target);
+
     let str = e.target.name.split(/(?=[_])/);
     let endpointName = str[0];
     let objectName = str[1].substring(1);
+    console.log(endpointName);
+    console.log(objectName);
+    console.log(e.target.value);
+    console.log(this.state);
     this.setState({
       [endpointName]: {
         ...this.state[endpointName],
@@ -108,9 +114,8 @@ export default class AddEventTabs extends React.Component {
               <ListGroup.Item>
                 <b>Typ załadunku osobistego: </b>
                 <select
-                  name="cars"
+                  name="events_personalCargoType"
                   onChange={this.onChange}
-                  id="events_personalCargoType"
                   data-tip="Lekki - małe ILBE <br/>
                   Cięzki - duże ILBE <br/> Bardzo ciężki - duże ILBE + torba realizacyjna"
                   data-place="right"
@@ -125,7 +130,7 @@ export default class AddEventTabs extends React.Component {
 
               <ListGroup.Item>
                 <b>Odległość od miejsca zbiórki:</b>{" "}
-                <input name="events_meetingLocation" onChange={this.onChange} />
+                <input name="events_distance" onChange={this.onChange} />
               </ListGroup.Item>
             </ListGroup>
           </Tab>
@@ -134,11 +139,7 @@ export default class AddEventTabs extends React.Component {
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <b>Typ: </b>
-                <select
-                  name="gears_type"
-                  onChange={this.onChange}
-                  id="events_personalCargoType"
-                >
+                <select name="gears_type" onChange={this.onChange}>
                   <option>Lekki</option>
                   <option>Ciężki</option>
                   <option>Bardzo ciężki</option>

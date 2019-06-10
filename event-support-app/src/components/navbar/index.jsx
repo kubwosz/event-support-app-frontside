@@ -15,6 +15,14 @@ import "./style.css";
 import decode from "jwt-decode";
 
 class HomeNavbar extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      username: "",
+      email: ""
+    };
+  }
+
   checkAuth = () => {
     const token = localStorage.getItem("token");
     const isValid = this.checkIfEndpointResponses(token);
@@ -76,6 +84,32 @@ class HomeNavbar extends React.Component {
     }
   }
 
+  getUserInfo = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      },
+      params: {
+        id: localStorage.getItem("userId")
+      }
+    };
+
+    axios
+      .get("/userdetails", config)
+      .then(res => {
+        this.setState({
+          username: res.data.username,
+          email: res.data.email
+        });
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  };
+
   componentDidMount() {
     const token = localStorage.getItem("token");
     if (
@@ -83,6 +117,8 @@ class HomeNavbar extends React.Component {
       this.props.history.location.pathname !== "/register"
     ) {
       this.props.history.push("/login");
+    } else {
+      this.getUserInfo();
     }
   }
 
@@ -99,8 +135,11 @@ class HomeNavbar extends React.Component {
       return (
         <Container id="userLogged">
           <Form>
-            <Form.Group>KRzysiek</Form.Group>
-            <Form.Group>krzysztof@mail.com</Form.Group>
+            <Form.Group>{this.state.username}</Form.Group>
+            <Form.Group>{this.state.email}</Form.Group>
+            <a href={"/user/" + localStorage.getItem("userId")}>
+              Panel użytkownika
+            </a>
             <Button onClick={this.logOut} variant="outline-info">
               Wyloguj się
             </Button>

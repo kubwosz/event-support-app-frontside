@@ -28,13 +28,16 @@ class EventDetails extends React.Component {
         cargoCapacity: 0,
         GearsType: ""
       },
-      participants: []
+      participants: [],
+      userParticipates: false,
+      participationId: 0
     };
   }
 
   componentDidMount() {
     this.getEvent();
     this.getParticipants();
+    this.checkIfUserParticipates();
   }
 
   getEvent() {
@@ -133,6 +136,9 @@ class EventDetails extends React.Component {
         config
       )
       .then(res => {
+        this.setState({
+          userParticipates: true
+        });
         window.confirm("Zapisano pomyślnie");
       })
       .catch(err => {
@@ -149,19 +155,14 @@ class EventDetails extends React.Component {
         Authorization: token
       }
     };
+
     axios
-      .delete(
-        "/participants",
-        {
-          eventId: this.state.event.id,
-          userId: localStorage.getItem("userId"),
-          role: "Automatic Rifleman",
-          leader: 2
-        },
-        config
-      )
+      .delete("/participants" + "/" + this.state.participationId, config)
       .then(res => {
-        window.confirm("Zapisano pomyślnie");
+        this.setState({
+          userParticipates: false
+        });
+        window.confirm("Usunięto pomyślnie");
       })
       .catch(err => {
         console.log("err");
@@ -177,18 +178,21 @@ class EventDetails extends React.Component {
         Authorization: token
       },
       params: {
-        userId: localStorage.getItem("userId")
+        userId: localStorage.getItem("userId"),
+        eventId: parseInt(this.props.match.params.id)
       }
     };
 
     axios
       .get("/participants", config)
       .then(res => {
-        if (res.data === []) {
-          this.setState({ eventParticipationId: res.data[0] });
-          return false;
+        this.setState({
+          participationId: res.data.id
+        });
+        if (res.data === "") {
+          this.setState({ userParticipates: false });
         } else {
-          return true;
+          this.setState({ userParticipates: true });
         }
       })
       .catch(err => {
@@ -219,6 +223,7 @@ class EventDetails extends React.Component {
     return (
       <div id="OwnerBtns">
         <Button
+          id="editBtn"
           onClick={() =>
             this.props.history.push(
               "/event/" + this.props.match.params.id + "/edit"
@@ -227,7 +232,9 @@ class EventDetails extends React.Component {
         >
           Edytuj wydarzenie
         </Button>
-        <Button onClick={() => this.deleteEvent()}>Usuń</Button>
+        <Button id="deleteBtn" onClick={() => this.deleteEvent()}>
+          Usuń
+        </Button>
       </div>
     );
   };
@@ -244,13 +251,15 @@ class EventDetails extends React.Component {
               ? this.returnOwnerBtns()
               : null}
             <Container id="MainInfo">
-              <h1>{event.name}</h1>
+              <h1>
+                {event.name} | ID: {event.id}
+              </h1>
               <h2>{event.location}</h2>
               {this.returnDate(event)}
               <p />
             </Container>
             <div id="RegisterBtn">
-              {!this.checkIfUserParticipates ? (
+              {!this.state.userParticipates ? (
                 <Button onClick={() => this.registerParticipant()}>
                   Zapisz się na wydarzenie
                 </Button>
@@ -283,9 +292,9 @@ class EventDetails extends React.Component {
           <Jumbotron id="jumbotronCosts" fluid>
             <Container>
               <h4>Całkowity koszt wyjazdu:</h4>
-              1200.00 PLN
+              {this.state.event.transportCost} PLN
               <h4>Na osobę:</h4>
-              100.00PLN
+              {this.state.event.sharedCost} PLN
             </Container>
           </Jumbotron>
 

@@ -1,0 +1,13 @@
+#UserDetailsPage{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-gap: 10%;
+}
+
+#UserDetails{
+    margin: auto;
+}
+
+#CarDetails{
+    margin: auto;
+}

@@ -36,7 +36,8 @@ class AddEvent extends React.Component {
     this.setState({
       events: {
         ...this.state.events,
-        ownerId: parseInt(ownerId)
+        ownerId: parseInt(ownerId),
+        guideId: parseInt(ownerId)
       }
     });
   }

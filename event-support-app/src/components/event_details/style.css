@@ -34,9 +34,7 @@
 }
 
 #OwnerBtns{
-    justify-self: flex-start;
-    align-self: flex-end;
-    display: inline-block;
+    margin-left: 600px;
 }
 
 
