@@ -17,15 +17,14 @@ import decode from "jwt-decode";
 class HomeNavbar extends React.Component {
   checkAuth = () => {
     const token = localStorage.getItem("token");
-    if (token != null) {
+    const isValid = this.checkIfEndpointResponses(token);
+    if (token != null || isValid) {
       const tokenDecoded = decode(token); //sub exp
       this.getUserId(token, tokenDecoded.sub);
 
-      if (token !== null) {
-        return <b style={{ color: "green" }}>Zalogowany</b>;
-      } else {
-        return <b style={{ color: "red" }}>Niezalogowany</b>;
-      }
+      return <b style={{ color: "green" }}>Zalogowany</b>;
+    } else {
+      return <b style={{ color: "red" }}>Niezalogowany</b>;
     }
   };
 

@@ -1,17 +1,11 @@
 import React from "react";
-import {
-  Container,
-  FormControl,
-  InputGroup,
-  Jumbotron,
-  FormGroup
-} from "react-bootstrap";
+import { Container, FormControl, InputGroup, Jumbotron } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import AddEventTabs from "../add_event_tabs/index";
 import "./style.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale, setDefaultLocale } from "react-datepicker";
+import { registerLocale } from "react-datepicker";
 import pl from "date-fns/locale/pl";
 registerLocale("pl", pl);
 

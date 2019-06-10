@@ -64,10 +64,10 @@ class MembersList extends React.Component {
   }
 
   renderItem(member, index) {
+    console.log(member);
     return (
-      <a href={"#" + (index + 1)}>
+      <a href={"#" + (index + 1)} key={index}>
         <Row
-          key={index}
           onClick={() => {
             this.setState({
               activeMemberId: member.id
