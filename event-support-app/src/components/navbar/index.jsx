@@ -19,6 +19,8 @@ class HomeNavbar extends React.Component {
     const token = localStorage.getItem("token");
     const isValid = this.checkIfEndpointResponses(token);
     if (token != null || isValid) {
+      console.log(token);
+
       const tokenDecoded = decode(token); //sub exp
       this.getUserId(token, tokenDecoded.sub);
 

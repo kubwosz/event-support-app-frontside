@@ -94,7 +94,7 @@ export default class RegisterPage extends React.Component {
       })
       .then(() => {
         window.confirm("Użytkownik zarejestrowany pomyślnie");
-        //this.props.history.push("/login/");
+        this.props.history.push("/login/");
       })
       .catch(err => {
         console.log(err);

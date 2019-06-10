@@ -9,6 +9,12 @@ body{
     color: rgb(180, 180, 180);
 }
 
+h1,h2{
+    font-weight: bold;
+    font-family: "Times New Roman", Times, serif;
+    margin: 2%;
+}
+
 .btn-primary{
     margin: 1%;
     background-color: rgb(134, 134, 134);
@@ -19,6 +25,15 @@ body{
     margin: 1%;
     background-color: rgb(218, 181, 35);
     border-color: rgb(218, 181, 35);
+}
+
+.badge-secondary{
+    background-color: rgb(134, 134, 134);
+    border-color: rgb(218, 181, 35);
+    border-width: 1px;
+    margin: 1%;
+    padding: 2%;
+    font-weight: 400;
 }
 
 a{
@@ -66,6 +81,7 @@ select{
 .list-group-item{
     background-color: $main-background;
     border-color: white; 
+    color: white;
 }
 
 .nav-tabs .nav-link.active{
@@ -102,9 +118,4 @@ select{
 
 .col{
     padding: 0.7%;
-}
-
-h1,h2{
-    font-weight: bold;
-    font-family: "Times New Roman", Times, serif;
 }

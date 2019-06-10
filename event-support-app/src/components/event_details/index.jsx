@@ -2,7 +2,7 @@ import axios from "axios";
 import moment from "moment";
 import "moment/locale/pl";
 import React from "react";
-import { Container, Jumbotron, Button } from "react-bootstrap";
+import { Container, Jumbotron, Button, Badge } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
 import EventDetailsTabs from "../event_details_tabs/index";
 import "./style.css";
@@ -83,7 +83,7 @@ class EventDetails extends React.Component {
       });
   };
 
-  getParticipants() {
+  getParticipants = () => {
     const token = localStorage.getItem("token");
 
     var config = {
@@ -97,15 +97,105 @@ class EventDetails extends React.Component {
     axios
       .get("/participants", config)
       .then(res => {
-        this.setState({
-          participants: res.data
-        });
+        this.setState(
+          {
+            participants: res.data
+          },
+          () => {
+            console.log("participants");
+            console.log(res.data);
+          }
+        );
       })
       .catch(err => {
         console.log("err");
         console.log(err);
       });
-  }
+  };
+
+  registerParticipant = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      }
+    };
+    axios
+      .post(
+        "/participants",
+        {
+          eventId: this.state.event.id,
+          userId: localStorage.getItem("userId"),
+          role: "Automatic Rifleman",
+          leader: 2
+        },
+        config
+      )
+      .then(res => {
+        window.confirm("Zapisano pomyślnie");
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  };
+
+  unregisterParticipant = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      }
+    };
+    axios
+      .delete(
+        "/participants",
+        {
+          eventId: this.state.event.id,
+          userId: localStorage.getItem("userId"),
+          role: "Automatic Rifleman",
+          leader: 2
+        },
+        config
+      )
+      .then(res => {
+        window.confirm("Zapisano pomyślnie");
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  };
+
+  checkIfUserParticipates = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      },
+      params: {
+        userId: localStorage.getItem("userId")
+      }
+    };
+
+    axios
+      .get("/participants", config)
+      .then(res => {
+        if (res.data === []) {
+          this.setState({ eventParticipationId: res.data[0] });
+          return false;
+        } else {
+          return true;
+        }
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  };
 
   returnDate = event => {
     let startDate = moment(event.startDate);
@@ -149,17 +239,32 @@ class EventDetails extends React.Component {
       <div id="eventDetailsPage">
         <div id="eventLeft">
           <Jumbotron className="jumbotronEvent" id="eventJumbotronMain" fluid>
-            {this.state.event.ownerId == localStorage.getItem("userId")
+            {parseInt(this.state.event.ownerId) ===
+            parseInt(localStorage.getItem("userId"))
               ? this.returnOwnerBtns()
               : null}
-
             <Container id="MainInfo">
               <h1>{event.name}</h1>
               <h2>{event.location}</h2>
               {this.returnDate(event)}
               <p />
             </Container>
-            <Button id="RegisterBtn">Zapisz się na wydarzenie</Button>
+            <div id="RegisterBtn">
+              {!this.checkIfUserParticipates ? (
+                <Button onClick={() => this.registerParticipant()}>
+                  Zapisz się na wydarzenie
+                </Button>
+              ) : (
+                <h4>
+                  <Badge variant="secondary">
+                    Jesteś zapisany na wydarzenie
+                  </Badge>
+                  <Button onClick={() => this.unregisterParticipant()}>
+                    Wypisz się
+                  </Button>
+                </h4>
+              )}
+            </div>
           </Jumbotron>
 
           {event.id === 0 ? null : <EventDetailsTabs event={event} />}
