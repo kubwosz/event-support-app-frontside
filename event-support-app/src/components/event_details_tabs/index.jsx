@@ -37,9 +37,6 @@ export default class EventDetailsTabs extends React.Component {
   }
 
   getData = type => {
-    console.log("TASKS");
-    console.log(this.props);
-    console.log(this.state);
     var config = {
       headers: {
         Authorization: this.state.token
@@ -48,8 +45,6 @@ export default class EventDetailsTabs extends React.Component {
     axios
       .get("/" + type + "s", config)
       .then(res => {
-        console.log("res2");
-        console.log(res);
         this.setState({
           [type]: res.data[0]
         });
@@ -60,8 +55,6 @@ export default class EventDetailsTabs extends React.Component {
   };
 
   render() {
-    console.log("this.state");
-    console.log(this.state);
     let { event, task, gear, purchase } = this.state;
 
     return (

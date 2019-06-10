@@ -39,17 +39,12 @@ class AddEvent extends React.Component {
 
   componentDidMount() {
     const ownerId = localStorage.getItem("userId");
-    console.log("OWNERID");
-    console.log(ownerId);
-    this.setState(
-      {
-        events: {
-          ...this.state.events,
-          ownerId: parseInt(ownerId)
-        }
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      events: {
+        ...this.state.events,
+        ownerId: parseInt(ownerId)
+      }
+    });
   }
 
   onChange = e => {
@@ -62,11 +57,9 @@ class AddEvent extends React.Component {
         [objectName]: e.target.value
       }
     });
-    console.log(this.state);
   };
 
   handleDateTimeChangeStart = date => {
-    console.log(date);
     this.setState({
       events: { ...this.state.events, startDate: date }
     });

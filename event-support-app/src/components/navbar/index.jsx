@@ -18,13 +18,8 @@ class HomeNavbar extends React.Component {
   checkAuth = () => {
     const token = localStorage.getItem("token");
     if (token != null) {
-      console.log(token);
       const tokenDecoded = decode(token); //sub exp
-      console.log("user name");
-      console.log(tokenDecoded.exp);
-      console.log("user id");
       this.getUserId(token, tokenDecoded.sub);
-      console.log();
 
       if (token !== null) {
         return <b style={{ color: "green" }}>Zalogowany</b>;
@@ -35,8 +30,6 @@ class HomeNavbar extends React.Component {
   };
 
   getUserId(token, username) {
-    console.log("getuserid");
-    console.log(username);
     var config = {
       headers: {
         Authorization: token
@@ -48,8 +41,6 @@ class HomeNavbar extends React.Component {
     axios
       .get("/users/search/findByUsername", config)
       .then(res => {
-        console.log("tototo");
-        console.log(res);
         let urlWithId = res.data._links.self.href;
         var result = /[^/]*$/.exec(urlWithId)[0];
 
@@ -86,12 +77,10 @@ class HomeNavbar extends React.Component {
 
   componentDidMount() {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (
       token === null &&
       this.props.history.location.pathname !== "/register"
     ) {
-      console.log(this.props.history);
       this.props.history.push("/login");
     }
   }
@@ -105,7 +94,6 @@ class HomeNavbar extends React.Component {
 
   renderUserInformations = () => {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (token != null) {
       return (
         <Container id="userLogged">

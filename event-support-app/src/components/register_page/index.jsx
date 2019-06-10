@@ -37,7 +37,6 @@ export default class RegisterPage extends React.Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log(this.state);
   };
 
   onChangeUsername = e => {
@@ -85,7 +84,6 @@ export default class RegisterPage extends React.Component {
   };
 
   registerUser = () => {
-    console.log(this.state);
     axios
       .post("/signup", {
         username: this.state.username,
@@ -109,7 +107,6 @@ export default class RegisterPage extends React.Component {
   };
 
   handleSubmit(event) {
-    console.log("too");
     const form = event.currentTarget;
     if (form.checkValidity() === true) {
       this.registerUser();

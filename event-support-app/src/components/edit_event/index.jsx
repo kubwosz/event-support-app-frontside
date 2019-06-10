@@ -50,25 +50,17 @@ export default class EditEvent extends React.Component {
     axios
       .get("/events", config)
       .then(res => {
-        console.log("res");
-        console.log(res);
-        this.setState(
-          {
-            events: {
-              ...res.data[0],
-              startDate: new Date(res.data[0].startDate),
-              endDate: new Date(res.data[0].endDate)
-            }
-          },
-          () => {
-            console.log(this.state);
+        this.setState({
+          events: {
+            ...res.data[0],
+            startDate: new Date(res.data[0].startDate),
+            endDate: new Date(res.data[0].endDate)
           }
-        );
+        });
       })
       .catch(err => {
         console.log("error:");
         console.log(err);
-        console.log(this.state);
       });
   }
 
@@ -82,11 +74,9 @@ export default class EditEvent extends React.Component {
         [objectName]: e.target.value
       }
     });
-    //console.log(this.state);
   };
 
   handleDateTimeChangeStart = date => {
-    console.log(date);
     this.setState({
       events: { ...this.state.events, startDate: date }
     });

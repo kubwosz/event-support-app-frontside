@@ -61,8 +61,6 @@ export default class AddEventTabs extends React.Component {
   }
 
   postEventInfo = () => {
-    console.log("this.state");
-    console.log(this.state);
     const token = localStorage.getItem("token");
 
     var config = {
@@ -71,11 +69,9 @@ export default class AddEventTabs extends React.Component {
       }
     };
 
-    console.log(this.state);
     axios
       .post("/events", this.state.events, config)
       .then(response => {
-        console.log(response);
         window.confirm("Wydarzenie dodane pomyślnie");
       })
       .catch(err => {

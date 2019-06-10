@@ -51,8 +51,6 @@ export default class EditEventTabs extends React.Component {
   }
 
   putEventInfo = () => {
-    console.log("this.state");
-    console.log(this.state);
     const token = localStorage.getItem("token");
 
     var config = {
@@ -64,11 +62,9 @@ export default class EditEventTabs extends React.Component {
       }
     };
 
-    console.log(this.state);
     axios
       .put("/events", this.state.events, config)
       .then(response => {
-        console.log(response);
         window.confirm("Wydarzenie edytowane pomyślnie");
       })
       .catch(err => {
@@ -86,7 +82,6 @@ export default class EditEventTabs extends React.Component {
         [objectName]: e.target.value
       }
     });
-    console.log(this.state);
   };
 
   render() {

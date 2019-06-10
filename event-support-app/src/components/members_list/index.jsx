@@ -57,7 +57,6 @@ class MembersList extends React.Component {
     };
 
     axios.get("/users", config).then(res => {
-      console.log(res);
       this.setState({
         members: res.data._embedded.users
       });
@@ -73,8 +72,6 @@ class MembersList extends React.Component {
             this.setState({
               activeMemberId: member.id
             });
-            console.log("this.state");
-            console.log(member);
           }}
         >
           <Col>

@@ -52,16 +52,9 @@ class EventDetails extends React.Component {
     axios
       .get("/events", config)
       .then(res => {
-        console.log("res");
-        console.log(res);
-        this.setState(
-          {
-            event: res.data[0]
-          },
-          () => {
-            console.log(this.state);
-          }
-        );
+        this.setState({
+          event: res.data[0]
+        });
       })
       .catch(err => {
         console.log("err");
@@ -104,14 +97,9 @@ class EventDetails extends React.Component {
     axios
       .get("/participants", config)
       .then(res => {
-        this.setState(
-          {
-            participants: res.data
-          },
-          () => {
-            console.log(this.state);
-          }
-        );
+        this.setState({
+          participants: res.data
+        });
       })
       .catch(err => {
         console.log("err");

@@ -24,7 +24,6 @@ class EventsList extends React.Component {
   }
 
   getAllMembers() {
-    console.log(this.state);
     const token = localStorage.getItem("token");
 
     var config = {
@@ -36,10 +35,8 @@ class EventsList extends React.Component {
         perPage: this.state.eventsPerPage
       }
     };
-    console.log(config);
 
     axios.get("/events", config).then(res => {
-      console.log(res);
       this.setState({
         events: res.data
       });
