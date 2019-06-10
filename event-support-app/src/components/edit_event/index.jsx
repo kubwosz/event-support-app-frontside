@@ -14,7 +14,7 @@ export default class EditEvent extends React.Component {
     super();
     this.state = {
       events: {
-        owner_id: 0,
+        ownerId: 0,
         name: "",
         ownersName: "",
         location: "",

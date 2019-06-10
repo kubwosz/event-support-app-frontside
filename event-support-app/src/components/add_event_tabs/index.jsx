@@ -43,16 +43,6 @@ export default class AddEventTabs extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const ownerId = localStorage.getItem("userId");
-    this.setState({
-      events: {
-        ...this.state.events,
-        ownerId: ownerId
-      }
-    });
-  }
-
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.events !== this.props.events) {
       this.setState({
@@ -103,7 +93,6 @@ export default class AddEventTabs extends React.Component {
         [objectName]: e.target.value
       }
     });
-    console.log(this.state);
   };
 
   render() {

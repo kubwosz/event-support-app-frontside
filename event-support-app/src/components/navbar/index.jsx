@@ -48,6 +48,7 @@ class HomeNavbar extends React.Component {
     axios
       .get("/users/search/findByUsername", config)
       .then(res => {
+        console.log("tototo");
         console.log(res);
         let urlWithId = res.data._links.self.href;
         var result = /[^/]*$/.exec(urlWithId)[0];

@@ -20,7 +20,7 @@ class AddEvent extends React.Component {
     super();
     this.state = {
       events: {
-        owner_id: 0,
+        ownerId: 0,
         name: "",
         ownersName: "",
         location: "",
@@ -35,6 +35,21 @@ class AddEvent extends React.Component {
         gearsType: ""
       }
     };
+  }
+
+  componentDidMount() {
+    const ownerId = localStorage.getItem("userId");
+    console.log("OWNERID");
+    console.log(ownerId);
+    this.setState(
+      {
+        events: {
+          ...this.state.events,
+          ownerId: parseInt(ownerId)
+        }
+      },
+      () => console.log(this.state)
+    );
   }
 
   onChange = e => {

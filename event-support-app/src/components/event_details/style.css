@@ -33,7 +33,7 @@
     align-items: center;
 }
 
-#EditBtn{
+#OwnerBtns{
     justify-self: flex-start;
     align-self: flex-end;
     display: inline-block;

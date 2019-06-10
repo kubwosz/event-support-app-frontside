@@ -14,7 +14,7 @@ class EventDetails extends React.Component {
     this.state = {
       event: {
         id: 0,
-        owner_id: 0,
+        ownerId: 0,
         name: "",
         ownersName: "",
         location: "",
@@ -137,31 +137,38 @@ class EventDetails extends React.Component {
     return component;
   };
 
+  returnOwnerBtns = () => {
+    return (
+      <div id="OwnerBtns">
+        <Button
+          onClick={() =>
+            this.props.history.push(
+              "/event/" + this.props.match.params.id + "/edit"
+            )
+          }
+        >
+          Edytuj wydarzenie
+        </Button>
+        <Button onClick={() => this.deleteEvent()}>Usuń</Button>
+      </div>
+    );
+  };
+
   render() {
     let event = this.state.event;
 
-    const dates = this.returnDate(event);
     return (
       <div id="eventDetailsPage">
         <div id="eventLeft">
           <Jumbotron className="jumbotronEvent" id="eventJumbotronMain" fluid>
-            <Button
-              id="EditBtn"
-              onClick={() =>
-                this.props.history.push(
-                  "/event/" + this.props.match.params.id + "/edit"
-                )
-              }
-            >
-              Edytuj wydarzenie
-            </Button>
-            <Button id="EditBtn" onClick={() => this.deleteEvent()}>
-              Usuń
-            </Button>
+            {this.state.event.ownerId == localStorage.getItem("userId")
+              ? this.returnOwnerBtns()
+              : null}
+
             <Container id="MainInfo">
               <h1>{event.name}</h1>
               <h2>{event.location}</h2>
-              {dates}
+              {this.returnDate(event)}
               <p />
             </Container>
             <Button id="RegisterBtn">Zapisz się na wydarzenie</Button>
