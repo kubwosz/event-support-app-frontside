@@ -25,6 +25,10 @@ export default class UserDetails extends React.Component {
     // this.getMemberDetails();
   }
 
+  onChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
   getMember() {
     const token = localStorage.getItem("token");
     var config = {
@@ -103,7 +107,11 @@ export default class UserDetails extends React.Component {
             <Col>
               <ListGroupItem>
                 <b className="detailsHeader">Status: </b>
-                dostępny
+                <FormControl
+                  placeholder={
+                    this.state.user ? this.state.user.currentState : null
+                  }
+                />
               </ListGroupItem>
             </Col>
           </Row>
@@ -111,11 +119,14 @@ export default class UserDetails extends React.Component {
             <Col>
               <ListGroupItem>
                 <b className="detailsHeader">Wolne weekendy: </b>
-                Tak
+                <FormControl
+                  placeholder={this.state.user.freeWeekends ? "tak" : "nie"}
+                />
               </ListGroupItem>
             </Col>
           </Row>
         </div>
+        <Button onClick={this.updateUser}>Aktualizuj</Button>
         <div id="CarDetails">
           <h2>Szczegóły o samochodzie:</h2>
           <CarDetails car={this.state.car} />
