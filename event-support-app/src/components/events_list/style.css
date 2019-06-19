@@ -1,17 +1,24 @@
 .grid-wrapper{
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-gap: 1.5rem;
-    grid-auto-flow: dense;
-    margin: 5%;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-gap: 5rem;
+    margin: 3%;
+    height: 500px;
 }
+
 .grid-item{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 170px;
+    width: 430px;
     cursor: pointer;
+    background-color: rgb(53, 53, 53);
 }
 
 #EventsList{
-    margin: 1%;
+    margin-top: 1%;
+    justify-content: center;
+}
+
+.pagination{
+    justify-content: center;
+    margin: 5%;
 }

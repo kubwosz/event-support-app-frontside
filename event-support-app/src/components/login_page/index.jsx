@@ -1,7 +1,6 @@
-import React from "react";
-import { Jumbotron, Container } from "react-bootstrap";
-import { Form, Button } from "react-bootstrap";
 import axios from "axios";
+import React from "react";
+import { Button, Container, Form, Jumbotron } from "react-bootstrap";
 
 export default class LoginPage extends React.Component {
   constructor(...args) {
@@ -25,9 +24,8 @@ export default class LoginPage extends React.Component {
         password: this.state.password
       })
       .then(response => {
-        console.log(response);
         localStorage.setItem("token", response.headers.authorization);
-        window.location.reload();
+        this.props.history.push("/events");
       })
       .catch(err => {
         window.confirm(err);
@@ -35,8 +33,6 @@ export default class LoginPage extends React.Component {
   };
 
   render() {
-    const { password, password2, show, target, isPasswordCorrect } = this.state;
-
     return (
       <div style={{ width: "40%", margin: "auto" }}>
         <Jumbotron fluid>

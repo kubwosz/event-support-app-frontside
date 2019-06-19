@@ -1,17 +1,10 @@
-.list-group-item{
-    cursor: pointer;
-}
-
-.col{
-    padding: 0.7%;
-}
-
 #Page {
     display: grid;
     grid-template-columns: 50% 50%;
     grid-gap: 1rem;
     grid-auto-flow: dense;
     margin: 2%;
+    font-size: 18px;
 }
 
 #Members{
@@ -21,13 +14,16 @@
     width: 30rem;
 }
 
-#MemberDetails{
+.memberDetails{
     grid-column: 2;
     margin: auto;
     width: 30rem;
 }
 
-h1,h2{
-    font-weight: bold;
-    font-family: "Times New Roman", Times, serif;
+#Page .list-group-item{
+    background-color: rgb(98, 98, 98);
 }
+
+
+
+

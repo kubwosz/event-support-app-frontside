@@ -1,15 +1,15 @@
 import React from "react";
 import { Container, FormControl, InputGroup, Jumbotron } from "react-bootstrap";
-import { withRouter } from "react-router-dom";
-import AddEventTabs from "../add_event_tabs/index";
+import EditEventTabs from "../edit_event_tabs/index";
 import "./style.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale } from "react-datepicker";
+import { registerLocale, setDefaultLocale } from "react-datepicker";
+import axios from "axios";
 import pl from "date-fns/locale/pl";
 registerLocale("pl", pl);
 
-class AddEvent extends React.Component {
+export default class EditEvent extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -32,14 +32,36 @@ class AddEvent extends React.Component {
   }
 
   componentDidMount() {
-    const ownerId = localStorage.getItem("userId");
-    this.setState({
-      events: {
-        ...this.state.events,
-        ownerId: parseInt(ownerId),
-        guideId: parseInt(ownerId)
+    this.getEvent();
+  }
+
+  getEvent() {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      },
+      params: {
+        id: parseInt(this.props.match.params.id)
       }
-    });
+    };
+
+    axios
+      .get("/events", config)
+      .then(res => {
+        this.setState({
+          events: {
+            ...res.data[0],
+            startDate: new Date(res.data[0].startDate),
+            endDate: new Date(res.data[0].endDate)
+          }
+        });
+      })
+      .catch(err => {
+        console.log("error:");
+        console.log(err);
+      });
   }
 
   onChange = e => {
@@ -81,6 +103,7 @@ class AddEvent extends React.Component {
                 aria-label="Name"
                 aria-describedby="inputGroup-sizing-default"
                 name="events_name"
+                value={this.state.events.name}
                 onChange={this.onChange}
               />
             </InputGroup>
@@ -95,6 +118,7 @@ class AddEvent extends React.Component {
                 aria-label="Location"
                 aria-describedby="inputGroup-sizing-default"
                 name="events_location"
+                value={this.state.events.location}
                 onChange={this.onChange}
               />
             </InputGroup>
@@ -134,11 +158,9 @@ class AddEvent extends React.Component {
           </Container>
         </Jumbotron>
         {this.state.events.id === 0 ? null : (
-          <AddEventTabs events={this.state.events} />
+          <EditEventTabs events={this.state.events} />
         )}
       </div>
     );
   }
 }
-
-export default withRouter(AddEvent);

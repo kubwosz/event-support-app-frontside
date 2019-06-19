@@ -1,8 +1,12 @@
+import axios from "axios";
+import moment from "moment";
+import "moment/locale/pl";
 import React from "react";
-import { Tabs, Tab, Jumbotron, Container, ListGroup } from "react-bootstrap";
-import _ from "lodash";
+import { Container, Jumbotron, Button, Badge } from "react-bootstrap";
 import { withRouter } from "react-router-dom";
+import EventDetailsTabs from "../event_details_tabs/index";
 import "./style.css";
+import _ from "lodash";
 
 class EventDetails extends React.Component {
   constructor() {
@@ -10,7 +14,7 @@ class EventDetails extends React.Component {
     this.state = {
       event: {
         id: 0,
-        owner_id: 0,
+        ownerId: 0,
         name: "",
         ownersName: "",
         location: "",
@@ -23,141 +27,292 @@ class EventDetails extends React.Component {
         sharedCost: 0,
         cargoCapacity: 0,
         GearsType: ""
-      }
+      },
+      participants: [],
+      userParticipates: false,
+      participationId: 0
     };
   }
 
   componentDidMount() {
-    this.getAllMembers();
+    this.getEvent();
+    this.getParticipants();
+    this.checkIfUserParticipates();
   }
 
-  getAllMembers() {
-    this.setState(prevState => ({
-      event: {
-        id: -1,
-        owner_id: 13,
-        name: "Rekonstrukcja Air Soft Gun nad jeziorem!",
-        ownersName: "Andrzejek",
-        location: "Mazury",
-        startDate: "09-05-2020 13:00",
-        endDate: "10-05-2020 17:00",
-        meetingLocation: "Wroclaw",
-        distance: 150,
-        personalCargoType: "Jedna walizka duża, jedna mała",
-        transportCost: 35.6,
-        sharedCost: 35.6,
-        cargoCapacity: 20,
-        GearsType: ""
+  getEvent() {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      },
+      params: {
+        id: parseInt(this.props.match.params.id)
       }
-    }));
+    };
+
+    axios
+      .get("/events", config)
+      .then(res => {
+        this.setState({
+          event: res.data[0]
+        });
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
   }
 
-  // getAllMembers(nextProps = this.props.match.params.id) {
-  //   this.setState(prevState => ({
-  //     event: {
-  //       ...prevState.event,
-  //       id: nextProps
-  //     }
-  //   }));
-  // }
+  deleteEvent = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      }
+    };
+
+    axios
+      .delete("/events" + "/" + this.state.event.id, config)
+      .then(res => {
+        this.props.history.push("/events");
+        window.confirm("Usunięto pomyślnie");
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  };
+
+  getParticipants = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      },
+      params: {
+        eventId: parseInt(this.props.match.params.id)
+      }
+    };
+    axios
+      .get("/participants", config)
+      .then(res => {
+        this.setState(
+          {
+            participants: res.data
+          },
+          () => {
+            console.log("participants");
+            console.log(res.data);
+          }
+        );
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  };
+
+  registerParticipant = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      }
+    };
+    axios
+      .post(
+        "/participants",
+        {
+          eventId: this.state.event.id,
+          userId: localStorage.getItem("userId"),
+          role: "Automatic Rifleman",
+          leader: 2
+        },
+        config
+      )
+      .then(res => {
+        this.setState({
+          userParticipates: true
+        });
+        window.confirm("Zapisano pomyślnie");
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  };
+
+  unregisterParticipant = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      }
+    };
+
+    axios
+      .delete("/participants" + "/" + this.state.participationId, config)
+      .then(res => {
+        this.setState({
+          userParticipates: false
+        });
+        window.confirm("Usunięto pomyślnie");
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  };
+
+  checkIfUserParticipates = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      },
+      params: {
+        userId: localStorage.getItem("userId"),
+        eventId: parseInt(this.props.match.params.id)
+      }
+    };
+
+    axios
+      .get("/participants", config)
+      .then(res => {
+        this.setState({
+          participationId: res.data.id
+        });
+        if (res.data === "") {
+          this.setState({ userParticipates: false });
+        } else {
+          this.setState({ userParticipates: true });
+        }
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  };
+
+  returnDate = event => {
+    let startDate = moment(event.startDate);
+    let endDate = moment(event.endDate);
+    let component = {};
+
+    if (startDate.isValid() && endDate.isValid()) {
+      component = (
+        <h5>
+          {startDate.format("LLLL")} - {endDate.format("LLLL")}
+        </h5>
+      );
+    } else {
+      component = <h5>Brak ustalonej daty</h5>;
+    }
+
+    return component;
+  };
+
+  returnOwnerBtns = () => {
+    return (
+      <div id="OwnerBtns">
+        <Button
+          id="editBtn"
+          onClick={() =>
+            this.props.history.push(
+              "/event/" + this.props.match.params.id + "/edit"
+            )
+          }
+        >
+          Edytuj wydarzenie
+        </Button>
+        <Button id="deleteBtn" onClick={() => this.deleteEvent()}>
+          Usuń
+        </Button>
+      </div>
+    );
+  };
 
   render() {
+    let event = this.state.event;
+
     return (
-      <div>
-        <Jumbotron className="JumbotronEvent" fluid>
-          <Container>
-            <h1>{this.state.event.name}</h1>
-            <h2>{this.state.event.location}</h2>
-            <h5>17 maja 2019 13:00 - 19 maja 2019 18:30</h5>
-            <p />
-          </Container>
-        </Jumbotron>
-        <h1 id="eventInfo">Informacje o wydarzeniu:</h1>
-        <div id="EventInformations">
-          <Tabs defaultActiveKey="main" id="uncontrolled-tab-example">
-            <Tab eventKey="main" title="Główne">
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <b> Utworzone przez:</b> {this.state.event.ownersName}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Miejsce wydarzenia:</b> {this.state.event.location}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Miejsce zbiórki:</b> {this.state.event.meetingLocation}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Odległość od miejsca zbiórki:</b>{" "}
-                  {this.state.event.distance}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Rozpoczęcie wydarzenia:</b> 17 maja 2019 13:00
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Zakończenie wydarzenia:</b> 19 maja 2019 18:30
-                </ListGroup.Item>
-              </ListGroup>
-            </Tab>
+      <div id="eventDetailsPage">
+        <div id="eventLeft">
+          <Jumbotron className="jumbotronEvent" id="eventJumbotronMain" fluid>
+            {parseInt(this.state.event.ownerId) ===
+            parseInt(localStorage.getItem("userId"))
+              ? this.returnOwnerBtns()
+              : null}
+            <Container id="MainInfo">
+              <h1>
+                {event.name} | ID: {event.id}
+              </h1>
+              <h2>{event.location}</h2>
+              {this.returnDate(event)}
+              <p />
+            </Container>
+            <div id="RegisterBtn">
+              {!this.state.userParticipates ? (
+                <Button onClick={() => this.registerParticipant()}>
+                  Zapisz się na wydarzenie
+                </Button>
+              ) : (
+                <h4>
+                  <Badge variant="secondary">
+                    Jesteś zapisany na wydarzenie
+                  </Badge>
+                  <Button onClick={() => this.unregisterParticipant()}>
+                    Wypisz się
+                  </Button>
+                </h4>
+              )}
+            </div>
+          </Jumbotron>
 
-            <Tab eventKey="date" title="Koszty">
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <b>Koszt transportu:</b> {this.state.event.meetingLocation}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Koszt do podziału:</b> {this.state.event.distance}
-                </ListGroup.Item>
-              </ListGroup>
-            </Tab>
+          {event.id === 0 ? null : <EventDetailsTabs event={event} />}
+        </div>
 
-            <Tab eventKey="cargo" title="Bagaż">
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <b>Rodzaj bagażu:</b> {this.state.event.personalCargoType}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Pojemność auta:</b> {this.state.event.cargoCapacity}
-                </ListGroup.Item>
-              </ListGroup>
-            </Tab>
+        <div id="eventRight">
+          <Jumbotron id="jumbotronGuides" fluid>
+            <Container>
+              <h4>Przewodnik:</h4>
+              Daniel Piotrkowski organizator@mail.com
+              <h4>Nasz łącznik</h4>
+              Jan Kowalski
+            </Container>
+          </Jumbotron>
 
-            <Tab eventKey="gears" title="Odzież">
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <b>Typ:</b> {this.state.event.GearsType}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Kamuflaż:</b> {this.state.event.GearsCamoufalge}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Dodatkowa odzież:</b> {this.state.event.GearsAdditional}
-                </ListGroup.Item>
-              </ListGroup>
-            </Tab>
+          <Jumbotron id="jumbotronCosts" fluid>
+            <Container>
+              <h4>Całkowity koszt wyjazdu:</h4>
+              {this.state.event.transportCost} PLN
+              <h4>Na osobę:</h4>
+              {this.state.event.sharedCost} PLN
+            </Container>
+          </Jumbotron>
 
-            <Tab eventKey="tasks" title="Zadania">
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <b>Status:</b> {this.state.event.TasksStatus}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Opis:</b> {this.state.event.TasksDescription}
-                </ListGroup.Item>
-              </ListGroup>
-            </Tab>
-
-            <Tab eventKey="participants" title="Uczestnicy">
-              <ListGroup variant="flush">
-                <ListGroup.Item>
-                  <b>Rola:</b> {this.state.event.participantsRole}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  <b>Lider:</b> {this.state.event.participantsLeader}
-                </ListGroup.Item>
-                <b>Lista uczestników:</b>
-              </ListGroup>
-            </Tab>
-          </Tabs>
+          <Jumbotron id="jumbotronCostsOther" fluid>
+            <Container>
+              <h5>Całkowity koszt zakupów:</h5>
+              <p> 1000.00PLN</p>
+              <h5>Dzielony koszt zakupów:</h5>
+              <p> 600.00PLN</p>
+              <h5>Dzielony koszt zakupów na osobę:</h5>
+              <p> 50.00PLN</p>
+              <p />
+              <h5>Całkowity koszt paliwa:</h5>
+              <p> 1000.00PLN</p>
+              <h5>Koszt paliwa na osobę:</h5>
+              <p> 50.00PLN</p>
+            </Container>
+          </Jumbotron>
         </div>
       </div>
     );

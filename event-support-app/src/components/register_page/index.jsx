@@ -1,24 +1,39 @@
-import React from "react";
-import { Jumbotron, Container } from "react-bootstrap";
-import { Form, Button, Col } from "react-bootstrap";
-import { Overlay, Tooltip } from "react-bootstrap";
-import "./style.css";
 import axios from "axios";
+import React from "react";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  Jumbotron,
+  Overlay,
+  Tooltip
+} from "react-bootstrap";
+import CarDetails from "../car_details/index";
+import "./style.css";
 
 export default class RegisterPage extends React.Component {
   constructor(...args) {
     super(...args);
 
-    this.attachRef = target => this.setState({ target });
+    this.attachRefPass = targetPass => this.setState({ targetPass });
+    this.attachRefUser = targetUser => this.setState({ targetUser });
     this.state = {
       username: "",
       email: "",
       password: "",
       password2: "",
-      isPasswordCorrect: true,
       address: "",
-      show: false,
-      haveCar: true
+      showTooltipPass: false,
+      showTooltipUser: false,
+      haveCar: false,
+      formValidated: false,
+      car: {
+        model: "",
+        combustion: 0,
+        peopleCapacity: 0,
+        cargoCapacity: 0
+      }
     };
   }
 
@@ -26,20 +41,48 @@ export default class RegisterPage extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  // onChangeUsername = e => {
+  //   var config = {
+  //     headers: {
+  //       Authorization:
+  //         "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrc2EiLCJleHAiOjE1NTk5OTY2NTF9.RNfud2FaOCsV9yy55pec1IrUAAjN6DJhxyoA3w4T1fkc50jGXb6z4WSTuh4-Q3OMleizqAV_bWGyxhbxjG0Krg"
+  //     },
+  //     params: {
+  //       username: e.target.value
+  //     }
+  //   };
+  //   axios
+  //     .get("/users/search/findByUsername", config)
+  //     .then(res => {
+  //       this.setState({
+  //         showTooltipUser: true
+  //       });
+  //     })
+  //     .catch(err => {
+  //       {
+  //         this.setState({
+  //           showTooltipUser: false
+  //         });
+  //       }
+  //       console.log("error:");
+  //       console.log(err);
+  //     });
+  //   this.setState({ username: e.target.value });
+  // };
+
+  onChangeEmail = e => {
+    this.setState({ email: e.target.value });
+  };
+
   onChangeCar = val => {
-    let temp = val.target.value == "Tak" ? true : false;
-    this.setState({ haveCar: temp });
+    let tmp = val.target.value === "Tak" ? true : false;
+    this.setState({ haveCar: tmp });
   };
 
   passwordValidation = () => {
-    this.setState(
-      {
-        isPasswordCorrect: this.state.password === this.state.password2
-      },
-      () => {
-        this.setState({ show: !this.state.isPasswordCorrect });
-      }
-    );
+    this.setState({
+      showTooltipPass: this.state.password !== this.state.password2
+    });
   };
 
   registerUser = () => {
@@ -51,16 +94,43 @@ export default class RegisterPage extends React.Component {
         password: this.state.password,
         vehicle: this.state.haveCar
       })
-      .then(() => {
+      .then(res => {
         window.confirm("Użytkownik zarejestrowany pomyślnie");
+        console.log(res);
+        this.props.history.push("/login/");
       })
       .catch(err => {
-        window.confirm(err);
+        console.log(err);
+        if (err.toString().includes("409")) {
+          window.confirm("Istnieje użytkownik o takiej ksywie!");
+        } else {
+          window.confirm(err);
+        }
       });
   };
 
+  addCar = () => {};
+
+  handleSubmit(event) {
+    const form = event.currentTarget;
+    if (form.checkValidity() === true) {
+      this.registerUser();
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    this.setState({ formValidated: true });
+  }
+
   render() {
-    const { password, password2, show, target, isPasswordCorrect } = this.state;
+    const {
+      password,
+      password2,
+      showTooltipPass,
+      showTooltipUser,
+      targetPass,
+      targetUser,
+      formValidated
+    } = this.state;
 
     return (
       <Container className="Container">
@@ -68,17 +138,11 @@ export default class RegisterPage extends React.Component {
           <Container>
             <h1>Zarejestruj się:</h1>
 
-            <Form>
-              <Form.Group as={Col} controlId="formGridName">
-                <Form.Label>Imię</Form.Label>
-                <Form.Control placeholder="Imię" />
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridSurname">
-                <Form.Label>Nazwisko</Form.Label>
-                <Form.Control placeholder="Nazwisko" />
-              </Form.Group>
-
+            <Form
+              noValidate
+              validated={formValidated}
+              onSubmit={e => this.handleSubmit(e)}
+            >
               <Form.Group as={Col} controlId="formGridUsername">
                 <Form.Label>Ksywa</Form.Label>
                 <Form.Control
@@ -86,7 +150,19 @@ export default class RegisterPage extends React.Component {
                   name="username"
                   placeholder="Ksywa"
                   onChange={this.onChange}
+                  ref={this.attachRefUser}
                 />
+                <Overlay
+                  target={targetUser}
+                  show={showTooltipUser}
+                  placement="right"
+                >
+                  {props => (
+                    <Tooltip id="overlay-example" {...props}>
+                      Istnieje już taka ksywa w systemie
+                    </Tooltip>
+                  )}
+                </Overlay>
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridEmail">
@@ -109,6 +185,7 @@ export default class RegisterPage extends React.Component {
                   placeholder="Hasło"
                   value={password}
                   onChange={this.onChange}
+                  onBlur={this.passwordValidation}
                 />
               </Form.Group>
 
@@ -122,9 +199,13 @@ export default class RegisterPage extends React.Component {
                   value={password2}
                   onChange={this.onChange}
                   onBlur={this.passwordValidation}
-                  ref={this.attachRef}
+                  ref={this.attachRefPass}
                 />
-                <Overlay target={target} show={show} placement="right">
+                <Overlay
+                  target={targetPass}
+                  show={showTooltipPass}
+                  placement="right"
+                >
                   {props => (
                     <Tooltip id="overlay-example" {...props}>
                       Hasła nie są identyczne
@@ -144,6 +225,20 @@ export default class RegisterPage extends React.Component {
               </Form.Group>
 
               <Form.Group>
+                <Form.Label>Status</Form.Label>
+                <Form.Control
+                  onChange={this.onChange}
+                  id="Current_state"
+                  as="select"
+                >
+                  <option>Rekrut</option>
+                  <option>Członek</option>
+                  <option>EAS</option>
+                  <option>Zewnętrzny</option>
+                </Form.Control>
+              </Form.Group>
+
+              <Form.Group>
                 <Form.Label>Czy posiadasz auto?</Form.Label>
                 <Form.Control
                   onChange={this.onChangeCar}
@@ -154,11 +249,11 @@ export default class RegisterPage extends React.Component {
                   <option>Tak</option>
                 </Form.Control>
               </Form.Group>
-
+              {/* {this.state.haveCar ? <CarDetails car={this.state.car} /> : null} */}
               <Button
                 variant="primary"
-                disabled={!isPasswordCorrect}
-                onClick={this.registerUser}
+                type="submit"
+                disabled={showTooltipPass || showTooltipUser}
               >
                 Zarejestruj
               </Button>

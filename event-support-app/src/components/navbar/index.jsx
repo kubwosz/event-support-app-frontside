@@ -1,20 +1,126 @@
-import React from "react";
-import { Navbar, Nav, NavDropdown, FormGroup } from "react-bootstrap";
-import { FormControl, Button, Form, Container } from "react-bootstrap";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from "axios";
+import React from "react";
+import {
+  Button,
+  Container,
+  Form,
+  Nav,
+  Navbar,
+  NavDropdown
+} from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 import "./style.css";
+import decode from "jwt-decode";
 
-export default class HomeNavbar extends React.Component {
+class HomeNavbar extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      username: "",
+      email: ""
+    };
+  }
+
   checkAuth = () => {
     const token = localStorage.getItem("token");
-    console.log(token);
-    if (token != null) {
+    const isValid = this.checkIfEndpointResponses(token);
+    if (token != null || isValid) {
+      console.log(token);
+
+      const tokenDecoded = decode(token); //sub exp
+      this.getUserId(token, tokenDecoded.sub);
+
       return <b style={{ color: "green" }}>Zalogowany</b>;
     } else {
       return <b style={{ color: "red" }}>Niezalogowany</b>;
     }
   };
+
+  getUserId(token, username) {
+    var config = {
+      headers: {
+        Authorization: token
+      },
+      params: {
+        username: username
+      }
+    };
+    axios
+      .get("/users/search/findByUsername", config)
+      .then(res => {
+        let urlWithId = res.data._links.self.href;
+        var result = /[^/]*$/.exec(urlWithId)[0];
+
+        localStorage.setItem("userId", result);
+      })
+      .catch(err => {
+        console.log("error2:");
+        console.log(err);
+      });
+  }
+
+  checkIfEndpointResponses(token) {
+    if (token != null) {
+      var config = {
+        headers: {
+          Authorization: token
+        }
+      };
+
+      axios
+        .get("/users", config)
+        .then(res => {
+          return true;
+        })
+        .catch(err => {
+          console.log("removing token...");
+          localStorage.removeItem("token");
+          return false;
+        });
+    } else {
+      return false;
+    }
+  }
+
+  getUserInfo = () => {
+    const token = localStorage.getItem("token");
+
+    var config = {
+      headers: {
+        Authorization: token
+      },
+      params: {
+        id: localStorage.getItem("userId")
+      }
+    };
+
+    axios
+      .get("/userdetails", config)
+      .then(res => {
+        this.setState({
+          username: res.data.username,
+          email: res.data.email
+        });
+      })
+      .catch(err => {
+        console.log("err");
+        console.log(err);
+      });
+  };
+
+  componentDidMount() {
+    const token = localStorage.getItem("token");
+    if (
+      token === null &&
+      this.props.history.location.pathname !== "/register"
+    ) {
+      this.props.history.push("/login");
+    } else {
+      this.getUserInfo();
+    }
+  }
 
   logOut = () => {
     console.log("infoWylogowany");
@@ -23,16 +129,17 @@ export default class HomeNavbar extends React.Component {
     this.forceUpdate();
   };
 
-  renderProperInformations = () => {
+  renderUserInformations = () => {
     const token = localStorage.getItem("token");
-    console.log(token);
     if (token != null) {
       return (
         <Container id="userLogged">
           <Form>
-            <Form.Group>KRzysiek</Form.Group>
-
-            <Form.Group>krzysztof@mail.com</Form.Group>
+            <Form.Group>{this.state.username}</Form.Group>
+            <Form.Group>{this.state.email}</Form.Group>
+            <a href={"/user/" + localStorage.getItem("userId")}>
+              Panel użytkownika
+            </a>
             <Button onClick={this.logOut} variant="outline-info">
               Wyloguj się
             </Button>
@@ -41,7 +148,7 @@ export default class HomeNavbar extends React.Component {
       );
     } else {
       return (
-        <div>
+        <div className="navbar">
           <Container id="userProperties">
             <Form>
               {/* <Form.Group>
@@ -59,14 +166,21 @@ export default class HomeNavbar extends React.Component {
                   className="mr-sm-2"
                 />
               </Form.Group> */}
-              <Button href="/login" variant="outline-info">
+              <Button
+                id="navDropdownButton"
+                href="/login"
+                variant="outline-info"
+              >
                 Zaloguj się
               </Button>
+              <a id="registerLink" href="/register">
+                Zarejestruj się
+              </a>
             </Form>
           </Container>
-          <NavDropdown.Item href="/register">
+          {/* <NavDropdown.Item href="/register">
             <b>Zarejestruj się</b>
-          </NavDropdown.Item>
+          </NavDropdown.Item> */}
         </div>
       );
     }
@@ -88,10 +202,11 @@ export default class HomeNavbar extends React.Component {
             id="collasible-nav-dropdown"
             alignRight
           >
-            {this.renderProperInformations()}
+            {this.renderUserInformations()}
           </NavDropdown>
         </Nav>
       </Navbar>
     );
   }
 }
+export default withRouter(HomeNavbar);

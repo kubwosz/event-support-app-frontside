@@ -1,8 +1,9 @@
 import React from "react";
-import { Container, Row, Col, ListGroupItem } from "react-bootstrap";
+import { Row, Col, ListGroupItem } from "react-bootstrap";
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import "./style.css";
+import axios from "axios";
 
 class MembersList extends React.Component {
   constructor() {
@@ -15,28 +16,28 @@ class MembersList extends React.Component {
           surname: "Nowak",
           email: "krzysztof@mail.com",
           address: "Wrocław, Plac Grunwaldzki"
-        },
-        {
-          id: 2,
-          name: "Łysy",
-          surname: "Nowak",
-          email: "lysegomail@mail.com",
-          address: "Warszawa, Plac Zbawiciela"
-        },
-        {
-          id: 3,
-          name: "Bombardier",
-          surname: "Nowak",
-          email: "sample2@mail.com",
-          address: "Poznań, Marszałkowska"
-        },
-        {
-          id: 4,
-          name: "Czołg",
-          surname: "Nowak",
-          email: "sample2@mail.com",
-          address: "Wrocław, Plac Grunwaldzki"
         }
+        // {
+        //   id: 2,
+        //   name: "Łysy",
+        //   surname: "Nowak",
+        //   email: "lysegomail@mail.com",
+        //   address: "Warszawa, Plac Zbawiciela"
+        // },
+        // {
+        //   id: 3,
+        //   name: "Bombardier",
+        //   surname: "Nowak",
+        //   email: "sample2@mail.com",
+        //   address: "Poznań, Marszałkowska"
+        // },
+        // {
+        //   id: 4,
+        //   name: "Czołg",
+        //   surname: "Nowak",
+        //   email: "sample2@mail.com",
+        //   address: "Wrocław, Plac Grunwaldzki"
+        // }
       ],
       activeMemberId: 0
     };
@@ -48,24 +49,37 @@ class MembersList extends React.Component {
   }
 
   getAllMembers() {
-    // this.setState({
-    // });
+    const token = localStorage.getItem("token");
+    var config = {
+      headers: {
+        Authorization: token
+      }
+    };
+
+    axios.get("/userdetails", config).then(res => {
+      console.log(res);
+      this.setState({
+        members: res.data.users
+      });
+    });
   }
 
   renderItem(member, index) {
+    console.log(member);
     return (
-      <Row
-        key={index}
-        onClick={() => {
-          this.setState({
-            activeMemberId: member.id
-          });
-        }}
-      >
-        <Col>
-          <ListGroupItem>{member.name}</ListGroupItem>
-        </Col>
-      </Row>
+      <a href={"#" + (index + 1)} key={index}>
+        <Row
+          onClick={() => {
+            this.setState({
+              activeMemberId: member.id
+            });
+          }}
+        >
+          <Col>
+            <ListGroupItem>{member.username}</ListGroupItem>
+          </Col>
+        </Row>
+      </a>
     );
   }
 
@@ -83,7 +97,7 @@ class MembersList extends React.Component {
           {members}
         </div>
         <div
-          id="MemberDetails"
+          className="memberDetails"
           style={{
             visibility: this.state.activeMemberId ? "visible" : "hidden"
           }}
@@ -102,19 +116,9 @@ class MembersList extends React.Component {
           <Row>
             <Col>
               <ListGroupItem>
-                <b className="detailsHeader">Imię: </b>
-                {this.state.members[activeMemberId]
-                  ? this.state.members[activeMemberId].name
-                  : null}
-              </ListGroupItem>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <ListGroupItem>
                 <b className="detailsHeader">Ksywka: </b>
                 {this.state.members[activeMemberId]
-                  ? this.state.members[activeMemberId].name
+                  ? this.state.members[activeMemberId].username
                   : null}
               </ListGroupItem>
             </Col>
